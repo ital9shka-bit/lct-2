@@ -1,0 +1,363 @@
+{
+  "schema_version": "1.0",
+  "version": "cognitive-0.8.0",
+  "families": 4,
+  "steps_per_session": 6,
+  "forms_per_step": 2,
+  "items": [
+    {
+      "id": "C1-a",
+      "family": "C1",
+      "step": 1,
+      "dimension": "analytical",
+      "format": "closed",
+      "stem": "Нужно разместить заявки A, B, C в слотах 1, 2, 3, по одной. A раньше C. C не в слоте 3. B не в слоте 2. Выберите единственный допустимый порядок.",
+      "options": {
+        "A": "A–C–B",
+        "B": "B–A–C",
+        "C": "A–B–C",
+        "D": "C–B–A"
+      },
+      "answer_key": "A",
+      "explanation": "B должен быть в3; C тогда в2, A в1.",
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C1-b",
+      "family": "C1",
+      "step": 1,
+      "dimension": "analytical",
+      "format": "closed",
+      "stem": "Проекты X, Y, Z занимают слоты1,2,3. X позже Y. Z не в слоте1. X не в слоте2. Выберите единственный допустимый порядок.",
+      "options": {
+        "A": "Z–Y–X",
+        "B": "Y–Z–X",
+        "C": "Y–X–Z",
+        "D": "X–Z–Y"
+      },
+      "answer_key": "B",
+      "explanation": "X в3, Y в1, Z в2.",
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C2-a-1",
+      "family": "C2",
+      "step": 2,
+      "dimension": "learning",
+      "format": "integer",
+      "stem": "Новое правило: начните с числа n; если n чётное, прибавьте3, иначе умножьте на2. Затем вычтите1. Для n=8 какой итог?",
+      "answer_key": 10,
+      "rule": {
+        "even_add": 3,
+        "odd_mul": 2,
+        "subtract": 1
+      },
+      "input": 8,
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C2-a-2",
+      "family": "C2",
+      "step": 3,
+      "dimension": "learning",
+      "format": "integer",
+      "stem": "То же правило: чётное n→n+3, нечётное n→2n; затем −1. Теперь n=7. Какой итог?",
+      "answer_key": 13,
+      "rule": {
+        "even_add": 3,
+        "odd_mul": 2,
+        "subtract": 1
+      },
+      "input": 7,
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C2-b-1",
+      "family": "C2",
+      "step": 2,
+      "dimension": "learning",
+      "format": "integer",
+      "stem": "Правило: чётное n разделите на2; к нечётному прибавьте4. Затем умножьте полученное на3. Для n=10 какой итог?",
+      "answer_key": 15,
+      "rule": {
+        "even_div": 2,
+        "odd_add": 4,
+        "multiply": 3
+      },
+      "input": 10,
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C2-b-2",
+      "family": "C2",
+      "step": 3,
+      "dimension": "learning",
+      "format": "integer",
+      "stem": "То же правило: чётное n→n/2, нечётное n→n+4; затем ×3. Теперь n=5. Какой итог?",
+      "answer_key": 27,
+      "rule": {
+        "even_div": 2,
+        "odd_add": 4,
+        "multiply": 3
+      },
+      "input": 5,
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C3-a-1",
+      "family": "C3",
+      "step": 4,
+      "dimension": "flexibility",
+      "format": "closed",
+      "stem": "Маршруты: A время8 и цена12; B время5 и цена20; C время11 и цена7. Правило: выберите наименьшее время без ограничения цены.",
+      "options": {
+        "A": "Маршрут A",
+        "B": "Маршрут B",
+        "C": "Маршрут C",
+        "D": "Ни один"
+      },
+      "answer_key": "B",
+      "routes": {
+        "A": [
+          8,
+          12
+        ],
+        "B": [
+          5,
+          20
+        ],
+        "C": [
+          11,
+          7
+        ]
+      },
+      "rule": {
+        "objective": "time",
+        "max_price": null
+      },
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C3-a-2",
+      "family": "C3",
+      "step": 5,
+      "dimension": "flexibility",
+      "format": "closed",
+      "stem": "Правило изменилось: цена не выше12; среди подходящих выберите наименьшее время. A: время8, цена12; B: время5, цена20; C: время11, цена7.",
+      "options": {
+        "A": "Маршрут A",
+        "B": "Маршрут B",
+        "C": "Маршрут C",
+        "D": "Ни один"
+      },
+      "answer_key": "A",
+      "routes": {
+        "A": [
+          8,
+          12
+        ],
+        "B": [
+          5,
+          20
+        ],
+        "C": [
+          11,
+          7
+        ]
+      },
+      "rule": {
+        "objective": "time",
+        "max_price": 12
+      },
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C3-b-1",
+      "family": "C3",
+      "step": 4,
+      "dimension": "flexibility",
+      "format": "closed",
+      "stem": "Маршруты: A время6 и цена18; B время9 и цена9; C время12 и цена6. Правило: выберите минимальную цену без ограничения времени.",
+      "options": {
+        "A": "Маршрут A",
+        "B": "Маршрут B",
+        "C": "Маршрут C",
+        "D": "Ни один"
+      },
+      "answer_key": "C",
+      "routes": {
+        "A": [
+          6,
+          18
+        ],
+        "B": [
+          9,
+          9
+        ],
+        "C": [
+          12,
+          6
+        ]
+      },
+      "rule": {
+        "objective": "price",
+        "max_time": null
+      },
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C3-b-2",
+      "family": "C3",
+      "step": 5,
+      "dimension": "flexibility",
+      "format": "closed",
+      "stem": "Правило изменилось: время не больше9; среди подходящих выберите минимальную цену. A: время6, цена18; B: время9, цена9; C: время12, цена6.",
+      "options": {
+        "A": "Маршрут A",
+        "B": "Маршрут B",
+        "C": "Маршрут C",
+        "D": "Ни один"
+      },
+      "answer_key": "B",
+      "routes": {
+        "A": [
+          6,
+          18
+        ],
+        "B": [
+          9,
+          9
+        ],
+        "C": [
+          12,
+          6
+        ]
+      },
+      "rule": {
+        "objective": "price",
+        "max_time": 9
+      },
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C4-a",
+      "family": "C4",
+      "step": 6,
+      "dimension": "analytical",
+      "format": "closed",
+      "stem": "Сбой проявляется только при двух условиях: включён режим R и размер больше10. Проверки: R выключен, размер20 — успех; R включён, размер8 — успех; R включён, размер20 — сбой. Какая следующая проверка лучше проверяет именно границу «больше10» при R?",
+      "options": {
+        "A": "R выключен, размер8",
+        "B": "R включён, размеры10 и11",
+        "C": "R выключен, размер100",
+        "D": "Повторить только R включён, размер20"
+      },
+      "answer_key": "B",
+      "explanation": "Одна переменная R фиксирована;10и11 проверяют обе стороны границы.",
+      "review_status": "authored_pending_independent_review"
+    },
+    {
+      "id": "C4-b",
+      "family": "C4",
+      "step": 6,
+      "dimension": "analytical",
+      "format": "closed",
+      "stem": "Сбой возникает, когда включён режим S и длина меньше5. S выключен, длина2 — успех; S включён, длина8 — успех; S включён, длина2 — сбой. Что лучше проверяет границу «меньше5» при S?",
+      "options": {
+        "A": "S выключен, длина2",
+        "B": "Повторить только S включён, длина2",
+        "C": "S включён, длины4 и5",
+        "D": "S выключен, длина100"
+      },
+      "answer_key": "C",
+      "explanation": "S фиксирован;4и5 проверяют обе стороны границы.",
+      "review_status": "authored_pending_independent_review"
+    }
+  ],
+  "self_assessment": {
+    "version": "self-0.8.0",
+    "questions": [
+      {
+        "id": "S1",
+        "dimension": "independence",
+        "stem": "Самостоятельно решаю незнакомую задачу",
+        "scale": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "S2",
+        "dimension": "learning",
+        "stem": "Осваиваю новую технологию",
+        "scale": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "S3",
+        "dimension": "debugging",
+        "stem": "Нахожу причины ошибок",
+        "scale": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "S4",
+        "dimension": "comparison",
+        "stem": "Сравниваю альтернативные решения",
+        "scale": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "S5",
+        "dimension": "constraints",
+        "stem": "Понимаю ограничения выбранного подхода",
+        "scale": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "anchors": {
+      "1": "Нужна пошаговая помощь",
+      "2": "Выполняю знакомые задачи с поддержкой",
+      "3": "Самостоятельно выполняю типичные задачи",
+      "4": "Самостоятельно решаю сложные случаи и объясняю ограничения",
+      "5": "Проектирую подход, проверяю чужие решения и помогаю команде"
+    },
+    "behavior": {
+      "id": "S6",
+      "stem": "С чего обычно начинаете незнакомую задачу?",
+      "options": {
+        "A": "Начинаю с пошаговой инструкции",
+        "B": "Сначала изучаю документацию и примеры",
+        "C": "Проверяю гипотезы небольшими экспериментами",
+        "D": "Сравниваю ограничения и компромиссы"
+      },
+      "scored": false
+    },
+    "grade_effect": false
+  },
+  "grade_effect": false,
+  "norms": null
+}

@@ -1,0 +1,27 @@
+{
+  "name": "oop-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "migrate": "node src/migrate.mjs",
+    "seed": "node src/seed.mjs",
+    "start": "node src/server.mjs",
+    "worker": "node src/worker.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:integration": "node --test tests/integration/*.test.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "express": "5.1.0",
+    "jose": "6.2.12",
+    "nodemailer": "10.0.16",
+    "pdfkit": "0.17.2",
+    "pg": "8.16.3"
+  }
+}

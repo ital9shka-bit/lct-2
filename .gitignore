@@ -1,0 +1,17 @@
+**/node_modules/
+**/public/
+**/.env
+**/.env.*
+!**/.env.example
+**/.runtime/
+**/.deployment/
+**/evidence/
+**/__pycache__/
+**/*.pyc
+.qa/
+*.log
+*.sql.gz
+*.dump
+*.pem
+*.key
+.DS_Store

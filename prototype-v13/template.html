@@ -1,0 +1,1768 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ООП — Объекто-ориентированный поиск | Локальный прототип</title>
+<style>
+:root{
+  --violet:#402FFF;
+  --violet-2:#6C5CFF;
+  --red:#EC1D35;
+  --ink:#1B1C21;
+  --muted:#6E7078;
+  --line:#DCDDDF;
+  --gray:#C8C9CA;
+  --light:#EDEDED;
+  --bg:#F6F6F8;
+  --white:#fff;
+  --ok:#0D7A45;
+  --ok-bg:#EAF7F0;
+  --warn:#8C5A00;
+  --warn-bg:#FFF3D6;
+  --danger:#A61D2C;
+  --danger-bg:#FFECEF;
+  --shadow:0 16px 45px rgba(27,28,33,.08);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+.app{min-height:100vh;display:grid;grid-template-columns:278px 1fr}
+.sidebar{
+  background:var(--ink);color:#fff;position:sticky;top:0;height:100vh;padding:22px 16px;
+  overflow:auto;border-right:3px solid var(--violet);
+}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px;margin-bottom:20px}
+.brand-symbol{width:43px;height:43px;position:relative;display:grid;place-items:center}
+.brand-symbol .node{width:6px;height:6px;background:var(--violet);border-radius:50%;position:absolute}
+.brand-symbol .node:nth-child(1){left:5px;top:18px}.brand-symbol .node:nth-child(2){left:18px;top:6px}.brand-symbol .node:nth-child(3){left:31px;top:18px}
+.brand-symbol .node:nth-child(4){left:18px;top:31px}.brand-symbol .node:nth-child(5){left:18px;top:18px;background:var(--red)}
+.brand-symbol:before,.brand-symbol:after{content:"";position:absolute;width:25px;height:1px;background:#8a82ff;transform:rotate(45deg)}
+.brand-symbol:after{transform:rotate(-45deg)}
+.brand-title{font-size:20px;font-weight:900;letter-spacing:-1px}
+.brand-sub{font-size:9px;color:#a7a9b2;margin-top:2px;line-height:1.35}
+.product-tag{margin:0 8px 18px;padding:10px 12px;background:#25262c;border:1px solid #373840;border-radius:12px;font-size:10px;color:#c5c7cf}
+.role-box{margin:0 8px 16px}
+.role-box label{display:block;font-size:9px;color:#9c9ea7;margin-bottom:7px}
+.role-box select{width:100%;border:0;border-radius:10px;background:#fff;color:var(--ink);padding:10px}
+.nav-group{margin-top:17px}
+.nav-title{padding:0 12px 7px;font-size:9px;color:#777a84;text-transform:uppercase;letter-spacing:.09em}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav button{
+  border:0;background:transparent;color:#c7c8ce;text-align:left;padding:10px 12px;border-radius:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px
+}
+.nav button:hover{background:#2A2B32;color:#fff}
+.nav button.active{background:#34353e;color:#fff;box-shadow:inset 3px 0 0 var(--violet)}
+.nav .count{font-size:9px;background:#4b4c55;color:#fff;padding:3px 6px;border-radius:999px}
+.sidebar-foot{font-size:9px;color:#7f828b;line-height:1.55;padding:22px 10px 4px}
+.main{min-width:0}
+.topbar{
+  height:70px;position:sticky;top:0;z-index:50;background:rgba(246,246,248,.92);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;padding:0 28px
+}
+.top-title{font-weight:900;letter-spacing:-.4px}
+.top-actions{display:flex;align-items:center;gap:9px}
+.demo-pill{font-size:9px;border:1px solid #d5d6db;background:#fff;padding:7px 10px;border-radius:999px}
+.content{padding:28px;max-width:1320px;margin:0 auto}
+.screen{display:none}.screen.active{display:block}
+.hero{
+  background:linear-gradient(135deg,#fff 0%,#f1efff 100%);
+  border:1px solid #ddd8ff;border-radius:28px;padding:34px;box-shadow:var(--shadow);
+  overflow:hidden;position:relative
+}
+.hero:before{content:"";position:absolute;width:430px;height:430px;border:1px solid rgba(64,47,255,.18);border-radius:50%;right:-210px;top:-230px}
+.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(236,29,53,.16);border-radius:50%;right:-100px;top:-110px}
+.hero h1{font-size:36px;line-height:1.08;letter-spacing:-1.6px;margin:10px 0;max-width:820px}
+.hero p{max-width:850px;color:#585A62;line-height:1.6;margin:0}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:9px;color:var(--violet);font-weight:900}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:18px}
+.card{
+  grid-column:span 4;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:0 6px 22px rgba(27,28,33,.035)
+}
+.card.span6{grid-column:span 6}.card.span8{grid-column:span 8}.card.full{grid-column:1/-1}
+.card h2,.card h3,.card h4{margin-top:0}
+.kpi{font-size:30px;font-weight:900;margin-top:7px;letter-spacing:-1px}
+.small{font-size:11px}.tiny{font-size:9px}.muted{color:var(--muted)}
+.badge{
+  display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:999px;font-size:10px;
+  color:#3426C8;background:#F0EEFF;border:1px solid #D9D4FF
+}
+.badge.ok{color:var(--ok);background:var(--ok-bg);border-color:#C8E8D7}
+.badge.warn{color:var(--warn);background:var(--warn-bg);border-color:#F2DA9D}
+.badge.gray{color:#62646B;background:#F3F3F4;border-color:#DEDFE2}
+.badge.red{color:var(--danger);background:var(--danger-bg);border-color:#FFC8D0}
+.stack{display:flex;flex-wrap:wrap;gap:7px}
+.btn{
+  border:0;background:var(--violet);color:#fff;border-radius:11px;padding:11px 14px;font-weight:800;
+  transition:.12s ease
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(.98)}
+.btn.secondary{background:#fff;color:var(--ink);border:1px solid #D5D6DC}
+.btn.ghost{background:transparent;color:var(--violet);border:1px solid #BDB6FF}
+.btn.red{background:var(--red)}
+.btn.sm{padding:8px 10px;font-size:10px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.divider{height:1px;background:#E5E5E8;margin:17px 0}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:10px;font-weight:900;margin-bottom:7px}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid #D4D5DB;background:#fff;color:var(--ink);border-radius:11px;padding:11px 12px;outline:none
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(64,47,255,.08)}
+.field textarea{min-height:110px;resize:vertical;line-height:1.55}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.callout{padding:15px;border-radius:14px;background:#F1EFFF;border:1px solid #D9D4FF}
+.callout.ok{background:var(--ok-bg);border-color:#C6E9D6}
+.callout.warn{background:var(--warn-bg);border-color:#F0D998}
+.callout.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.steps{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.step{display:flex;align-items:center;gap:6px;font-size:10px;color:#73757D}
+.step .dot{width:23px;height:23px;border-radius:50%;background:#E2E2E6;display:grid;place-items:center}
+.step.done .dot,.step.active .dot{background:var(--violet);color:#fff}.step.active{color:var(--ink);font-weight:900}
+.progress{height:8px;background:#E9E9EC;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:var(--violet)}
+.profile-head{display:flex;gap:15px;align-items:center}
+.avatar{width:66px;height:66px;border-radius:18px;background:linear-gradient(135deg,#E9E5FF,#C8C0FF);display:grid;place-items:center;color:#3527CA;font-size:22px;font-weight:900}
+.score{font-size:34px;font-weight:900;color:var(--violet);letter-spacing:-1px}
+.skill-row{display:grid;grid-template-columns:180px 1fr 55px;gap:11px;align-items:center;margin:11px 0}
+.skillbar{height:7px;background:#ECECEF;border-radius:999px;overflow:hidden}.skillbar div{height:100%;background:var(--violet)}
+.achievement{display:grid;grid-template-columns:38px 1fr;gap:11px;padding:12px;border:1px solid #E0E0E4;border-radius:13px;margin:9px 0}
+.achievement .icon{width:38px;height:38px;border-radius:12px;background:#F0EEFF;color:var(--violet);display:grid;place-items:center;font-weight:900}
+.candidate{
+  display:grid;grid-template-columns:1fr auto;gap:15px;border:1px solid #DEDFE3;border-radius:16px;padding:16px;margin:10px 0;background:#fff
+}
+.candidate:hover{border-color:#BBB4FF;box-shadow:0 8px 20px rgba(64,47,255,.06)}
+.candidate-top{display:flex;gap:12px;align-items:center}
+.mini-avatar{width:46px;height:46px;border-radius:13px;background:#EDEAFF;color:#382BD0;display:grid;place-items:center;font-weight:900}
+.match{font-size:22px;color:var(--violet);font-weight:900;text-align:right}
+.explain{margin:8px 0 0;padding-left:18px;line-height:1.7;font-size:10px;color:#5C5E66}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}
+.tab{border:1px solid #D7D8DD;background:#fff;color:var(--ink);padding:10px 14px;border-radius:10px;min-width:164px;font-weight:800;white-space:nowrap;opacity:1}
+.tab:hover{border-color:#B9B4D9;background:#F8F7FF}
+.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #ECECEF}
+.switch{width:40px;height:22px;background:#D8D9DD;border-radius:99px;position:relative}
+.switch:after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.switch.on{background:var(--violet)}.switch.on:after{left:20px}
+.radio-card{display:block;border:1px solid #D9DAE0;border-radius:13px;padding:13px;margin:9px 0}
+.radio-card:has(input:checked){border-color:var(--violet);background:#F4F2FF}
+.radio-card input{margin-right:9px}
+.code{background:#1B1C21;color:#F5F5F6;border-radius:14px;padding:15px;font-size:10px;line-height:1.7;overflow:auto}
+.locked{padding:14px;border:1px dashed #BFC0C6;background:#FAFAFB;border-radius:13px}
+.list-row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid #ECECEF}
+.demo-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:17px}
+.demo-node{background:#fff;border:1px solid #DCDDDF;border-radius:13px;padding:11px;font-size:9px;min-height:72px}
+.demo-node b{display:block;margin-bottom:6px;font-size:10px}
+.demo-node.active{border-color:var(--violet);background:#F4F2FF}
+.modal-wrap{position:fixed;inset:0;background:rgba(18,19,23,.52);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-wrap.open{display:flex}.modal{width:min(650px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:22px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.28)}
+.toast{position:fixed;right:22px;bottom:22px;z-index:200;background:var(--ink);color:#fff;padding:13px 16px;border-radius:12px;display:none;box-shadow:var(--shadow);font-size:11px}
+.toast.show{display:block}
+.note{border-left:3px solid var(--red);padding:8px 12px;background:#FFF8F8;font-size:10px;line-height:1.55}
+.logo-word{font-weight:900;letter-spacing:-1px}
+.logo-oop{font-size:36px;color:var(--violet);letter-spacing:-3px}
+.logo-oop span{color:var(--red)}
+.wizard-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 20px}
+.wizard-step{border:1px solid #DCDDDF;background:#fff;color:var(--ink);border-radius:12px;padding:11px;text-align:left;font-size:10px;font-weight:800}
+.wizard-step small{display:block;color:var(--muted);font-weight:400;margin-top:4px;line-height:1.35}
+.wizard-step.active{background:#F0EEFF;border-color:#9D93FF;color:#3325C9}
+.wizard-step.done{border-color:#BFE2D0;background:#F1FAF5;color:#0D7A45}
+.need-step{display:none}.need-step.active{display:block}
+.checkline{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #ECECEF;font-size:10px;line-height:1.45}
+.checkline input{width:auto;margin-top:2px}
+.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.summary-item{border:1px solid #E0E0E4;border-radius:12px;padding:11px;background:#fff}
+.summary-item b{display:block;font-size:10px;margin-bottom:5px}.summary-item span{font-size:10px;color:var(--muted);line-height:1.5}
+.shortlist-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#F5F3FF;border:1px solid #D9D4FF;border-radius:13px;padding:11px 13px;margin:12px 0}
+.category-strip{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.category-card{border:1px solid #DCDDDF;background:#fff;border-radius:12px;padding:10px 12px;font-size:10px}.category-card b{display:block;margin-bottom:4px}.category-card.recommended{border-color:#968BFF;background:#F3F1FF}
+.draft-banner{padding:14px;border-radius:14px;background:#FFF8E8;border:1px solid #F1D58B;margin-bottom:16px}.draft-banner.ok{background:#EAF7F0;border-color:#C8E8D7}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric-card{border:1px solid #DCDDDF;border-radius:14px;background:#fff;padding:15px}.metric-card .value{font-size:25px;font-weight:900;color:var(--violet);margin:4px 0}.metric-card .label{font-size:9px;color:var(--muted);line-height:1.4}
+.registration-shell{max-width:780px;margin:0 auto}.consent{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#5E6068;margin:9px 0}.consent input{margin-top:2px}
+.profile-progress{height:7px;background:#E9E9EC;border-radius:99px;overflow:hidden}.profile-progress>div{height:100%;background:var(--violet)}
+.inline-note{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:var(--muted)}
+.fsp-brand{height:42px;width:auto;display:block}
+@media(max-width:1050px){.wizard-nav{grid-template-columns:1fr 1fr}.metric-grid,.summary-grid{grid-template-columns:1fr}.tab{min-width:0}}
+@media(max-width:1050px){
+  .app{grid-template-columns:1fr}.sidebar{position:static;height:auto}.nav{display:grid;grid-template-columns:repeat(3,1fr)}.sidebar-foot{display:none}.content{padding:18px}.topbar{position:static}
+  .grid{display:block}.card{margin-top:14px}.cols2,.cols3{grid-template-columns:1fr}.demo-flow{grid-template-columns:1fr 1fr}.skill-row{grid-template-columns:130px 1fr 45px}
+}
+.demo-data-box{margin-top:18px;background:#fff;border:1px solid #DCDDDF;border-radius:18px;padding:18px}
+.demo-data-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.demo-data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.demo-persona{border:1px solid #E0E0E4;border-radius:13px;padding:12px;background:#FAFAFB}
+.demo-persona b{display:block;margin-bottom:4px}
+.demo-persona.highlight{border-color:#B8B1FF;background:#F5F3FF}
+.whatif{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;background:#F8F7FF;border:1px solid #DED9FF;border-radius:14px;margin:12px 0}
+.whatif-controls{display:flex;gap:8px;flex-wrap:wrap}
+.chipbtn{border:1px solid #CBC6FF;background:#fff;color:#372AC8;border-radius:999px;padding:8px 10px;font-size:10px}
+.chipbtn.on{background:#402FFF;color:#fff;border-color:#402FFF}
+.need-extra{padding:14px;background:#FAFAFB;border:1px solid #E2E2E6;border-radius:14px;margin-top:10px}
+@media(max-width:1050px){.demo-data-grid{grid-template-columns:1fr 1fr}}
+.intake-shell{display:grid;grid-template-columns:1.18fr .82fr;gap:18px}
+.form-panel,.side-panel{
+  background:#fff;border:1px solid #DCDDDF;border-radius:24px;padding:22px;box-shadow:0 10px 28px rgba(27,28,33,.045)
+}
+.side-panel{background:linear-gradient(180deg,#fff 0%,#F8F7FF 100%)}
+.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.panel-title{margin:0}
+.panel-sub{margin:4px 0 0;color:#686A72;font-size:11px;line-height:1.6}
+.section-group{padding:16px;background:#FAFAFB;border:1px solid #E6E6EA;border-radius:18px;margin-top:12px}
+.section-group.soft-purple{background:#F7F5FF;border-color:#DFDAFF}
+.section-group.soft-dark{background:linear-gradient(135deg,#1B1C21 0%,#282A33 100%);border-color:#1B1C21;color:#fff}
+.group-title{display:flex;align-items:center;gap:8px;margin:0 0 12px}
+.dot-icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#EDEAFF;color:#402FFF;font-weight:900;font-size:11px}
+.soft-dark .dot-icon{background:rgba(255,255,255,.12);color:#fff}
+.upload-box{
+  padding:18px;border:1.5px dashed #CFC8FF;background:linear-gradient(135deg,#FCFBFF 0%,#F4F2FF 100%);
+  border-radius:18px
+}
+.upload-file{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;background:#fff;border:1px solid #E5E0FF;border-radius:14px;margin-top:10px}
+.icon-square{width:40px;height:40px;border-radius:14px;background:#F0EEFF;color:#402FFF;display:grid;place-items:center;font-weight:900}
+.inline-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.meta-card{padding:12px;border-radius:14px;background:#fff;border:1px solid #E7E7EB}
+.meta-card b{display:block;font-size:12px;margin-bottom:4px}
+.field.compact{margin-bottom:10px}
+.field-hint{font-size:10px;color:#7B7D85;margin-top:5px;line-height:1.45}
+.preview-list{display:grid;gap:10px;margin-top:12px}
+.preview-item{padding:12px 13px;border-radius:14px;background:#fff;border:1px solid #E6E6EA}
+.preview-item b{display:block;margin-bottom:4px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-card{padding:14px;border:1px solid #E0E0E5;border-radius:16px;background:#fff}
+.choice-card.active{border-color:#BFB8FF;background:#F6F4FF}
+.form-actions-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px}
+.progress-mini{display:flex;align-items:center;gap:10px}
+.progress-mini .line{width:88px;height:6px;border-radius:99px;background:#E7E7EB;overflow:hidden}
+.progress-mini .line span{display:block;height:100%;width:50%;background:#402FFF}
+.info-callout{
+  padding:14px 15px;border-radius:16px;background:#FFFFFF;border:1px solid #E7E7EB
+}
+.brand-card{
+  padding:18px;border-radius:20px;background:linear-gradient(135deg,#1B1C21 0%,#2B2D36 100%);color:#fff;border:1px solid #1B1C21
+}
+.brand-card .logo{font-size:28px;font-weight:900;letter-spacing:-1px}
+.brand-card .logo span{color:#EC1D35}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.stat-card{padding:12px;background:#fff;border:1px solid #E6E6EA;border-radius:14px}
+.stat-card.dark{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#fff}
+.form-hero{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px;background:linear-gradient(135deg,#FCFBFF 0%,#F3F0FF 100%);
+  border:1px solid #E2DDFF;border-radius:20px;margin-bottom:14px
+}
+.form-hero .eyebrow{margin-bottom:4px}
+.segment-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.segment-card{padding:12px;border-radius:14px;border:1px solid #E5E5EA;background:#fff}
+.segment-card.active{background:#F7F5FF;border-color:#C8C1FF}
+.need-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:16px}
+.summary-side{padding:18px;border-radius:22px;background:linear-gradient(180deg,#FFFFFF 0%,#F7F5FF 100%);border:1px solid #E0DBFF}
+.summary-side h3{margin-top:0}
+.summary-kv{display:grid;gap:10px;margin-top:12px}
+.summary-kv .preview-item{background:#fff}
+.sticky-box{position:sticky;top:92px}
+.form-step-card{padding:16px;background:#fff;border:1px solid #E7E7EA;border-radius:18px}
+.wizard-step{min-height:70px}
+@media(max-width:1050px){
+  .intake-shell,.need-layout{grid-template-columns:1fr}
+  .inline-meta,.choice-grid,.segment-cards,.stat-grid{grid-template-columns:1fr}
+  .sticky-box{position:static}
+}
+/* ===== OOP Design System v5 ===== */
+:root{
+  --ds-space-1:4px; --ds-space-2:8px; --ds-space-3:12px; --ds-space-4:16px;
+  --ds-space-5:20px; --ds-space-6:24px; --ds-space-8:32px; --ds-space-10:40px;
+  --ds-radius-sm:10px; --ds-radius-md:14px; --ds-radius-lg:20px; --ds-radius-xl:28px;
+  --ds-shadow-sm:0 6px 18px rgba(27,28,33,.045);
+  --ds-shadow-md:0 16px 42px rgba(27,28,33,.075);
+  --ds-shadow-lg:0 30px 90px rgba(27,28,33,.14);
+  --ds-focus:0 0 0 4px rgba(64,47,255,.10);
+  --ds-font:"JetBrains Mono","SFMono-Regular","Cascadia Code",Consolas,monospace;
+}
+body{font-family:var(--ds-font);font-size:14px;letter-spacing:-.01em}
+h1,h2,h3,h4{letter-spacing:-.035em}
+h1{font-weight:800} h2,h3{font-weight:800}
+.small{font-size:12px;line-height:1.55}.tiny{font-size:10px;line-height:1.45}
+.eyebrow{font-size:10px;letter-spacing:.12em}
+.card,.form-panel,.side-panel,.form-step-card,.summary-side{box-shadow:var(--ds-shadow-sm)}
+.card:hover{box-shadow:0 10px 30px rgba(27,28,33,.055)}
+.btn{
+  min-height:42px;padding:10px 16px;border-radius:12px;
+  box-shadow:0 6px 14px rgba(64,47,255,.14)
+}
+.btn.secondary{box-shadow:none}.btn.sm{min-height:34px;padding:7px 11px}
+.field label{font-size:11px;letter-spacing:-.015em}
+.field input,.field textarea,.field select{
+  min-height:46px;border-radius:13px;border-color:#DADBDF;
+  box-shadow:inset 0 1px 0 rgba(27,28,33,.02);
+  transition:border-color .16s ease,box-shadow .16s ease,background .16s ease
+}
+.field textarea{min-height:118px}
+.field input:hover,.field textarea:hover,.field select:hover{border-color:#C6C7CE}
+.field input:focus,.field textarea:focus,.field select:focus{box-shadow:var(--ds-focus);border-color:var(--violet)}
+.sidebar{border-right:0;box-shadow:10px 0 35px rgba(27,28,33,.08)}
+.topbar{height:74px}
+.top-title{font-size:15px}
+.brand-title{font-size:22px}
+.nav button{min-height:42px;font-size:11px}
+.nav button.active{background:linear-gradient(90deg,#353641 0%,#2B2C34 100%)}
+.hero{box-shadow:var(--ds-shadow-md)}
+.form-panel,.side-panel{border-radius:26px}
+.section-group{border-radius:19px}
+.wizard-nav{gap:10px}
+.wizard-step{border-radius:16px;padding:13px;transition:.15s ease}
+.wizard-step:hover{border-color:#C6C0FF;transform:translateY(-1px)}
+.wizard-step.active{box-shadow:0 8px 20px rgba(64,47,255,.08)}
+.badge{font-size:10px;font-weight:700}
+.preview-item{box-shadow:0 3px 12px rgba(27,28,33,.025)}
+.icon-svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-circle{
+  width:34px;height:34px;border-radius:12px;display:grid;place-items:center;
+  background:#F0EEFF;color:var(--violet);border:1px solid #DDD8FF;flex:0 0 auto
+}
+.group-title .icon-circle{width:30px;height:30px;border-radius:10px}
+.section-kicker{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.section-kicker h3{margin:0;font-size:14px}
+.subtle-grid{
+  background-image:linear-gradient(rgba(64,47,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(64,47,255,.035) 1px,transparent 1px);
+  background-size:28px 28px
+}
+/* Auth is a separate product state, not a navigation item */
+.auth-screen{
+  min-height:100vh;display:grid;grid-template-columns:minmax(360px,.85fr) minmax(520px,1.15fr);
+  background:#F5F5F7
+}
+.auth-brand{
+  position:relative;overflow:hidden;background:
+    radial-gradient(circle at 15% 15%,rgba(108,92,255,.75),transparent 27%),
+    radial-gradient(circle at 95% 75%,rgba(236,29,53,.35),transparent 24%),
+    #1B1C21;color:#fff;padding:52px;display:flex;flex-direction:column;justify-content:space-between
+}
+.auth-brand:before,.auth-brand:after{
+  content:"";position:absolute;border:1px solid rgba(255,255,255,.12);border-radius:50%
+}
+.auth-brand:before{width:460px;height:460px;right:-210px;top:-150px}
+.auth-brand:after{width:280px;height:280px;left:-150px;bottom:-120px}
+.auth-logo-wrap{position:relative;z-index:2;display:flex;align-items:center;gap:18px}
+.auth-fsp-logo{width:70px;height:auto}
+.auth-brand-name{font-size:34px;font-weight:900;letter-spacing:-2px}
+.auth-brand-name span{color:var(--red)}
+.auth-brand-copy{position:relative;z-index:2;max-width:560px}
+.auth-brand-copy h1{font-size:38px;line-height:1.07;margin:0 0 14px}
+.auth-brand-copy p{color:#C9CAD0;line-height:1.65;font-size:13px}
+.auth-principles{display:grid;gap:10px;margin-top:24px}
+.auth-principle{
+  display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:16px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09)
+}
+.auth-principle .icon-circle{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#fff}
+.auth-form-side{padding:48px 7vw;display:flex;align-items:center;justify-content:center}
+.auth-card{
+  width:min(600px,100%);background:#fff;border:1px solid #E2E2E6;border-radius:30px;padding:30px;
+  box-shadow:var(--ds-shadow-md)
+}
+.auth-card h2{font-size:28px;margin:4px 0 8px}
+.auth-mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.role-choice{
+  position:relative;border:1px solid #DDDEE3;border-radius:18px;padding:16px;background:#fff;cursor:pointer;transition:.15s ease
+}
+.role-choice:hover{border-color:#C7C1FF;transform:translateY(-1px)}
+.role-choice.active{border-color:#8F83FF;background:#F5F3FF;box-shadow:0 8px 22px rgba(64,47,255,.08)}
+.role-choice b{display:block;margin-top:10px}
+.role-choice p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.5}
+.auth-stage{display:none}.auth-stage.active{display:block}
+.auth-code{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0}
+.auth-code input{text-align:center;font-size:20px;font-weight:800;padding:10px 0;min-height:54px}
+.auth-divider{display:flex;align-items:center;gap:10px;color:#9799A0;font-size:10px;margin:18px 0}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#E7E7EA;flex:1}
+.auth-demo{
+  padding:13px 14px;border-radius:16px;background:#FAFAFB;border:1px dashed #D6D7DC
+}
+.demo-role-switch{
+  display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid #D8D9DE;border-radius:12px;background:#fff
+}
+.demo-role-switch label{font-size:9px;color:#7E8088}
+.demo-role-switch select{border:0;background:transparent;color:var(--ink);font-size:10px;font-weight:800;outline:none}
+.role-box{display:none!important}
+.app.auth-locked{display:none}
+.auth-screen.hidden{display:none}
+/* richer form headers + microillustrations */
+.micro-illustration{
+  position:relative;height:150px;border-radius:20px;overflow:hidden;
+  background:linear-gradient(135deg,#1B1C21,#30323C);border:1px solid #1B1C21
+}
+.micro-illustration .orb{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.20)}
+.micro-illustration .orb.one{width:120px;height:120px;right:-25px;top:-30px}
+.micro-illustration .orb.two{width:70px;height:70px;right:60px;top:55px;border-color:rgba(236,29,53,.45)}
+.micro-illustration .node{position:absolute;width:11px;height:11px;border-radius:50%;background:#6C5CFF}
+.micro-illustration .node.n1{left:30px;top:35px}.micro-illustration .node.n2{left:95px;top:80px}.micro-illustration .node.n3{left:160px;top:42px;background:#EC1D35}
+.micro-illustration .line{position:absolute;height:1px;background:rgba(255,255,255,.32);transform-origin:left center}
+.micro-illustration .l1{width:78px;left:39px;top:43px;transform:rotate(29deg)}
+.micro-illustration .l2{width:82px;left:103px;top:80px;transform:rotate(-28deg)}
+.micro-illustration .caption{position:absolute;left:24px;bottom:20px;color:#fff;font-weight:800;font-size:14px}
+.micro-illustration .caption small{display:block;color:#BFC1C8;font-weight:400;font-size:9px;margin-top:4px}
+@media(max-width:980px){
+  .auth-screen{grid-template-columns:1fr}.auth-brand{min-height:430px;padding:34px}.auth-form-side{padding:28px 18px}
+}
+/* ===== Candidate experience v8 ===== */
+.resume-shell{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(330px,.78fr);gap:18px}
+.resume-editor,.resume-preview{
+  background:#fff;border:1px solid #DCDDDF;border-radius:26px;padding:22px;box-shadow:var(--ds-shadow-sm)
+}
+.resume-preview{background:linear-gradient(180deg,#fff 0%,#F8F7FF 100%)}
+.resume-section{padding:17px;border:1px solid #E5E5E9;border-radius:18px;background:#FBFBFC;margin-top:12px}
+.resume-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.resume-section-head h3{margin:0;font-size:14px}
+.resume-section-head p{margin:4px 0 0}
+.resume-role{
+  padding:15px;border-radius:16px;background:#fff;border:1px solid #E1E2E6;margin-top:10px
+}
+.resume-role-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.resume-role h4{margin:0 0 4px}
+.resume-bullets{margin:10px 0 0;padding-left:18px;color:#5E6068;font-size:11px;line-height:1.65}
+.resume-preview-paper{
+  background:#fff;border:1px solid #E3E3E7;border-radius:20px;padding:22px;box-shadow:0 12px 32px rgba(27,28,33,.06)
+}
+.resume-preview-paper h2{margin:0 0 4px}
+.resume-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.verify-band{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:14px;border-radius:16px;background:#F2F0FF;border:1px solid #DBD6FF;margin-top:14px
+}
+.skill-matrix{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}
+.skill-matrix .skill-cell{padding:11px 12px;background:#fff;border:1px solid #E4E4E8;border-radius:13px}
+.skill-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.fsp-inline{
+  padding:16px;border-radius:18px;background:linear-gradient(135deg,#1B1C21,#292B34);color:#fff;margin-top:12px
+}
+.fsp-inline .field input{background:rgba(255,255,255,.96)}
+.fsp-result-card{padding:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);border-radius:14px;margin-top:9px}
+.empty-soft{padding:15px;border:1px dashed #CFD0D6;border-radius:16px;background:#FCFCFD;color:#6C6E76}
+.vacancy-listing{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}
+.vacancy-card{
+  padding:18px;background:#fff;border:1px solid #DEDFE3;border-radius:19px;margin-bottom:11px;transition:.15s ease
+}
+.vacancy-card:hover{border-color:#BBB4FF;box-shadow:0 10px 24px rgba(64,47,255,.06);transform:translateY(-1px)}
+.vacancy-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.vacancy-title{font-size:15px;font-weight:900;margin:0 0 5px}
+.salary{font-size:18px;font-weight:900;color:var(--ink);white-space:nowrap}
+.company-mark{width:44px;height:44px;border-radius:13px;background:#F0EEFF;color:#402FFF;display:grid;place-items:center;font-weight:900}
+.vacancy-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.vacancy-side{position:sticky;top:92px;height:max-content}
+.vacancy-detail-hero{
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;padding:26px;
+  border-radius:26px;background:linear-gradient(135deg,#fff,#F2F0FF);border:1px solid #DFDBFF;box-shadow:var(--ds-shadow-sm)
+}
+.vacancy-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;margin-top:18px}
+.prose-card{background:#fff;border:1px solid #DCDDDF;border-radius:21px;padding:21px}
+.prose-card h3{margin-top:20px}.prose-card h3:first-child{margin-top:0}
+.prose-card ul{padding-left:20px;line-height:1.7;color:#555861;font-size:12px}
+.offer-card{background:#fff;border:1px solid #DCDDDF;border-radius:21px;padding:20px;position:sticky;top:92px;height:max-content}
+.company-summary{display:flex;align-items:center;gap:12px}
+.profile-nav-note{font-size:10px;color:#7A7C84;line-height:1.5;margin-top:5px}
+.save-state{display:inline-flex;align-items:center;gap:6px;font-size:10px;color:#0D7A45;background:#EAF7F0;border:1px solid #C8E8D7;border-radius:999px;padding:6px 9px}
+@media(max-width:1050px){
+  .resume-shell,.vacancy-listing,.vacancy-detail-grid{grid-template-columns:1fr}
+  .vacancy-side,.offer-card{position:static}
+}
+
+/* ===== v12: resume modes, presets, structured need/search ===== */
+.mode-switch{
+  display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;
+  background:#ECECF1;border:1px solid #DEDFE4
+}
+.mode-switch button{
+  min-width:190px;border:0;background:transparent;color:#666871;border-radius:12px;
+  padding:11px 16px;font-weight:900
+}
+.mode-switch button.active{background:#fff;color:var(--ink);box-shadow:0 5px 16px rgba(27,28,33,.08)}
+.resume-mode{display:none}.resume-mode.active{display:block}
+.resume-workspace{max-width:1120px;margin:0 auto}
+.resume-edit-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}
+.editor-main,.editor-aside,.publication-paper{
+  background:#fff;border:1px solid #DCDDDF;border-radius:25px;box-shadow:var(--ds-shadow-sm)
+}
+.editor-main{padding:22px}.editor-aside{padding:18px;height:max-content;position:sticky;top:94px}
+.form-block{padding:17px;border:1px solid #E7E7EB;background:#FBFBFC;border-radius:18px;margin-top:12px}
+.form-block.featured{background:linear-gradient(135deg,#F6F3FF,#FFFFFF);border-color:#D9D3FF}
+.block-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.block-head h3{margin:0}.block-head p{margin:4px 0 0}
+.presets{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.preset{
+  border:1px solid #D8D9DE;background:#fff;color:#555860;border-radius:999px;padding:8px 11px;font-size:10px;
+  transition:.12s ease
+}
+.preset:hover{border-color:#AFA7FF;color:#362AC8}.preset.on{background:#402FFF;color:#fff;border-color:#402FFF}
+.token-input{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:10px;border:1px solid #DADBDF;background:#fff;border-radius:14px;min-height:48px}
+.token{display:inline-flex;gap:6px;align-items:center;padding:6px 9px;border-radius:999px;background:#F0EEFF;color:#382BC7;font-size:10px;border:1px solid #D8D3FF}
+.token.gray{background:#F3F3F4;color:#60626A;border-color:#DFE0E3}
+.token button{border:0;background:transparent;color:inherit;padding:0;font-size:12px}
+.inline-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+.fsp-feature{
+  background:linear-gradient(135deg,#1B1C21,#2B2D37);color:#fff;border-radius:20px;padding:18px;border:1px solid #1B1C21
+}
+.fsp-feature .field label{color:#fff}.fsp-feature .field input{background:#fff}
+.fsp-ach-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.fsp-ach{padding:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);border-radius:14px}
+.skill-row-v12{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #EBEBEE}
+.skill-row-v12:last-child{border-bottom:0}
+.skill-name b{display:block}.skill-name span{font-size:10px;color:#777981}
+.publication-paper{padding:30px;max-width:880px;margin:18px auto 0}
+.pub-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+.pub-section{padding-top:20px;margin-top:20px;border-top:1px solid #ECECEF}
+.pub-section h3{margin:0 0 10px}
+.pub-experience{padding:14px 0}
+.pub-experience+.pub-experience{border-top:1px solid #F0F0F2}
+.verification-strip{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
+.need-shell{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}
+.need-main,.need-summary{background:#fff;border:1px solid #DCDDDF;border-radius:25px;box-shadow:var(--ds-shadow-sm)}
+.need-main{padding:22px}.need-summary{padding:18px;height:max-content;position:sticky;top:94px}
+.required-star{color:#EC1D35;font-weight:900}
+.optional-tag{font-size:9px;color:#777A82;background:#F2F2F4;border:1px solid #E0E1E4;padding:4px 7px;border-radius:999px}
+.quick-templates{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.template-card{border:1px solid #E0E1E5;background:#fff;border-radius:15px;padding:12px;text-align:left;cursor:pointer}
+.template-card:hover{border-color:#B9B2FF;background:#F8F7FF}.template-card b{display:block;margin-bottom:4px}
+.optional-block{padding:14px;border:1px solid #E7E7EB;border-radius:17px;background:#FCFCFD;margin-top:11px}
+.optional-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.search-shell{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px}
+.filter-panel{background:#fff;border:1px solid #DCDDDF;border-radius:22px;padding:17px;height:max-content;position:sticky;top:94px}
+.filter-group{padding:13px 0;border-bottom:1px solid #ECECEF}.filter-group:last-child{border-bottom:0}
+.filter-group h4{margin:0 0 9px;font-size:11px}
+.check-chip{display:inline-flex;margin:0 5px 6px 0}
+.check-chip input{display:none}
+.check-chip span{display:inline-flex;padding:7px 9px;border-radius:999px;border:1px solid #D8D9DE;background:#fff;font-size:10px;cursor:pointer}
+.check-chip input:checked+span{background:#402FFF;color:#fff;border-color:#402FFF}
+.search-results{min-width:0}
+.need-context{padding:15px 16px;border-radius:17px;background:linear-gradient(135deg,#F6F4FF,#fff);border:1px solid #DDD8FF;margin-bottom:12px}
+.invitation-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media(max-width:1050px){
+  .resume-edit-grid,.need-shell,.search-shell{grid-template-columns:1fr}
+  .editor-aside,.need-summary,.filter-panel{position:static}
+  .quick-templates,.fsp-ach-grid{grid-template-columns:1fr}
+  .mode-switch{width:100%}.mode-switch button{min-width:0}
+}
+
+</style>
+<!-- V13_STYLES -->
+</head>
+<body>
+<div class="auth-screen" id="authScreen">
+  <section class="auth-brand">
+    <div class="auth-logo-wrap">
+      <div class="auth-fsp-logo" style="width:70px;height:46px;border:1px solid rgba(255,255,255,.25);border-radius:12px;display:grid;place-items:center;font-weight:900;color:#fff">ФСП</div>
+      <div>
+        <div class="auth-brand-name">ОО<span>П</span></div>
+        <div class="small" style="color:#B9BBC3">Объекто-ориентированный поиск</div>
+      </div>
+    </div>
+    <div class="auth-brand-copy">
+      <div class="eyebrow" style="color:#AFA8FF">ФСП · ООП</div>
+      <h1>Сначала — оценка.<br>Затем — предложения.</h1>
+      <p>Талант получает подтверждённый профиль, работодатель описывает реальную задачу, а система связывает два объекта на основании подтверждённых сигналов.</p>
+      <div class="auth-principles">
+        <div class="auth-principle">
+          <div class="icon-circle">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div><b>Подтверждённый профиль</b><div class="tiny" style="color:#BFC1C8;margin-top:3px">Тесты и достижения ФСП отделены от самоописания.</div></div>
+        </div>
+        <div class="auth-principle">
+          <div class="icon-circle">
+            <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 7h10M4 12h16M4 17h8"/><circle cx="18" cy="7" r="2"/></svg>
+          </div>
+          <div><b>Потребность команды</b><div class="tiny" style="color:#BFC1C8;margin-top:3px">Работодатель описывает задачу, а не набор ключевых слов.</div></div>
+        </div>
+        <div class="auth-principle">
+          <div class="icon-circle">
+            <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="16" r="3"/><path d="M10.5 10.2l4 3.4"/></svg>
+          </div>
+          <div><b>Объяснимый подбор</b><div class="tiny" style="color:#BFC1C8;margin-top:3px">Понятно, почему опыт таланта подходит к задаче.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tiny" style="position:relative;z-index:2;color:#7F828B">Прототип · синтетические данные</div>
+  </section>
+  <section class="auth-form-side">
+    <div class="auth-card">
+      <div id="authStage1" class="auth-stage active">
+        <div class="eyebrow">Создание аккаунта</div>
+        <h2>Начните с рабочей почты</h2>
+        <p class="small muted">Выберите роль и пройдите демонстрационный вход. Почта и сервер не подключены; можно сразу открыть готовый пример.</p>
+        <div class="auth-mode">
+          <div id="authCandidate" class="role-choice active" onclick="selectAuthRole('candidate')">
+            <div class="icon-circle">
+              <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4.5 4-7 8-7s6.8 2.5 8 7"/></svg>
+            </div>
+            <b>Я талант</b>
+            <p>Создам подтверждённый профиль и буду получать адресные предложения.</p>
+          </div>
+          <div id="authEmployer" class="role-choice" onclick="selectAuthRole('employer')">
+            <div class="icon-circle">
+              <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3M3 12h18"/></svg>
+            </div>
+            <b>Я работодатель</b>
+            <p>Опишу потребность и найду талантов по подтверждённым сигналам.</p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="authEmail">Email</label>
+          <input id="authEmail" value="alexey@example.com" placeholder="name@company.ru">
+          <div class="field-hint">В демо письмо не отправляется. Код для проверки интерфейса: 123456.</div>
+        </div>
+        <div class="section-group" style="margin:14px 0">
+          <label for="consentProcessing" class="radio-card" style="margin:0 0 8px"><input id="consentProcessing" type="checkbox"> Согласен на обработку данных для работы сервиса.</label>
+          <p class="tiny muted">Публикация профиля — отдельный шаг после заполнения резюме. Демо-вход не публикует данные.</p>
+        </div>
+        <button class="btn" style="width:100%" onclick="sendEmailCode()">Получить код подтверждения</button>
+        <div class="auth-divider">быстрый вход</div>
+        <div class="auth-demo">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div><b class="small">Войти в готовый пример</b><div class="tiny muted" style="margin-top:3px">Откроется уже заполненный профиль выбранной роли.</div></div>
+            <button class="btn secondary sm" onclick="demoEnter()">Открыть пример</button>
+          </div>
+        </div>
+      </div>
+      <div id="authStage2" class="auth-stage">
+        <div class="eyebrow">Подтверждение почты</div>
+        <h2>Введите код из письма</h2>
+        <p class="small muted">Демонстрационный код для <b id="authEmailPreview">alexey@example.com</b>. Для прототипа можно использовать <b>123456</b>.</p>
+        <div class="auth-code" role="group" aria-label="Шестизначный код подтверждения">
+          <input maxlength="1" value="" id="v13Field1"><input maxlength="1" value="" id="v13Field2"><input maxlength="1" value="" id="v13Field3">
+          <input maxlength="1" value="" id="v13Field4"><input maxlength="1" value="" id="v13Field5"><input maxlength="1" value="" id="v13Field6">
+        </div>
+        <div id="authCodeFeedback" class="field-error auth-feedback" role="alert"></div>
+        <button class="btn" style="width:100%" onclick="verifyEmailCode()">Подтвердить и продолжить</button>
+        <div class="actions" style="justify-content:center">
+          <button class="btn secondary sm" onclick="v13EditAuthEmail()">Изменить email</button>
+          <button class="btn secondary sm" onclick="v13ResendCode()">Отправить код ещё раз</button>
+        </div>
+      </div>
+      <div id="authStage3" class="auth-stage">
+        <div class="callout ok">
+          <b>Демонстрационный вход подтверждён</b>
+          <p class="small">Начните с самооценки: выберите специализацию и заявленный уровень, затем оцените свой опыт. После этого переходите к профессиональным вопросам.</p>
+        </div>
+        <button id="authEnterProduct" class="btn" style="width:100%;margin-top:14px" onclick="enterProduct()">Перейти к самооценке</button>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="app auth-locked" id="productApp">
+<aside class="sidebar">
+  <div class="brand">
+    <img class="fsp-brand" alt="ФСП" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH8AAACmCAYAAADzjFD0AAAABHNCSVQICAgIfAhkiAAAClhJREFUeJztnVuSpCoQhhNjdkC7nmOvrKpW1vZ6bLYg52Gkw3JQQTITSPki5qWjxgs/N/OGghsyTdMAANB13QAAMM/z2Pf9mO+J8qByPwAX0zQNSqmHUmo4+elLa/1keKTs3EL8n5+frwDR19yiA4gW3xjzBIBHwiVEdwKx4k/TNHRd95V6nXmeP6XuB7rcD0CFUiplxKNfp0REim+MeUau8bsopYZl+RCHyGnfGGOxrylx+hc38qWOUgrEiU+FxLVfnPjW2v9yP0MtiFvzKdZ7h9ZaVHuJG/mNcMSJb60dcz9DLYgTn5BX7gfARpz41lpxIlEhagPjuODFO0XaZg9A4MgHIBn9ImcTcb3ZgTn6JY56AKEjHwB19Isc9QCCxcdinucx9zNQIVZ8aR44CsSK7yJ0G/uIFd+FZe/wmuf5U2ut5nn+hIN1/eQ6VfMn9wNwYq0dPz4+Ptd/W5aHEQCevi8EyV5CkZ8we8GbIZ9sPq+gxCgeAKHT/s5UHfrJ9s/vJAZyAAgd+b7RG2OoucvoFzfyd2L4ogw1PrewxI2fOPEhLUMHAPzWQYkbP1Hi70XuxqZc9X0/bke/xPh9MeIf5OVdss0rpb49f35I6gDViz9N0/Dz8/MFCNP9mgObvpgOUKWRZ/mOH6y1/525bYkcMw9jzMNaO7oZosZs3qrE3xZYUIruSzVkd788xwAAYIx5wF+zcTVVPqqY9o0xT2OM7bouOkCD2UDz6Lruq5ZloXgjD0KBhUuROKnJHz4/QmnEWL2e6/WTY2rDEH4hqsJGrvteZV1gymkUos+u+G5TBQeNYK0drbUvio6AKAAApJt3EyDpAIEFpg73IN4GiW14ik5AkHMXJAJ2pwPA9wtgFZh62/BN0zQsjR718kqpoeu6L6zoGYoNU6h5lsKMi7XpdDaNC1HJD2OM3erzJn7qQ2J2AGyUUkPIs2Ene7hrpnZoF6OQ8nxbfX7Fx4pzx6iABcjTbijEn2iXLYNYlcUA3gd4B4BbwMhd7+r/pZw5CgjKeBhjrDHmGfqexpgnlvAA77OQAigrtw2zl285+/amaIcY1p5E6ufQWqtu+WRAv1EtVq41O548zvsP7h/1vaZpGjqqqbDE4Ifc4paEUupBZtu/2ntzOkUkp2b5KNKrt7hKB+779n0/GmNI7+HWdTcLrWdIzndWSg1/cm5w9rDWvgieK8jCR9XxYqygFFZGH2TTfkphJF8MHRdEZV1eHx8fwSZerfVTa60o28BaO3ZQaP45sgjBzpVFoCz33kJZX0gp9V1sMEff9+OSRJmEtXaMbfzl9xgNn+TRo54BFUDZVaoTjT5JjZ+49qK4cqmMXlpr5UY++vSCleHS9/24WAtjnzG58a/OAEv6d9K9HUSj/wWwbPi01s/SK1c6IY6ec9lRj5iN7zZfcNIJVvdV2LYK7LXftc2v/Z1ieqGsYuVzjHAYiHLdF+vzb70cv4lD0AFEn07FTWoH2O7DvCMT2bvVOgAiVzrAnoHpMIAz8ATKEFoHQMYY8zzLWDqzKgatyatI3l+2UaEBnaV1ACK27vPQrCH0DdnRtEQZ6t2Ih2Q3frZx9EXU+GYXR035bwD771LazEf6KYa4Z6hi1ojYjBWxBJLn6hHFxRXReI6ET+Ss70Hu2Fmmd2zzcTEFEhKja7O+B1uWLtGRZ1lHDoXVjRNOly6FbzrbyMGMtqEKVT+9L9eNanAexYAdnbzUFWKl2GCOCB7c+YHYGU4AvMGbDlbxqeLmpVTH5O7ErOITJnKw5uBRvQd3LqGEaZ+dEsPdr9DEj6TU+gNXELHmA8gShYs28iMp2bcQiwjxrbWsXj8qewV3FjGr+HfLgo2Fu31YxafKQOE+Np3qftxLCvu0jz21cU/5ACT5fEBwvVOy1N7FdIrEesTWpUrXf7/iHUT0VGbxTmYrvIzUcMGNFhFZFHVNDI9criPas+32ETJwg0RyVSsjChj+lks7+yHG9I+RiXyVrCXXMRMQsK6/IXgWuBiuljUYJXu9/UiB2KfkmD1FzLuUUI8/u5En8Nv2pbVW3MIDxNUTDs3oBSijLFx28Y9YqmoEi+7A9u/HulpDauqUYPAqVvzEaRHVLx5asXsLUeQyGiWLf6nRqAI6r84mJeUXbClS/BxWuzMSo3f+6cglhJ5lF9+3nibazklCoVKid3zrewm1iUv41Es66z7kelikJFdgvycGWUe+bxMlKbZ/je+9ckcfZZ/2t5Tw/btHSnQtt9s5hKzi+xoz9fu3ppkj97Ev2cTfO+GjtF3+mqvf+wD+90q5HgbZxCc84YN0esV+7pyjP4v4R7luqSOBvFixUgNmUiXGmXtXYRf/zPOFYfxgGP1DqM/fcfLbLKnmnMUZnhBogMEoVkB5RNuGUzdz5LOw+fjJxb8aUIHVATCLQp3gFa3kej2k4mPXiuV6juWcnW9XAi7kOPkVv0vOWYXMkGtRdgAy8REjdNEa4KhkqdsknoWIcR1+tIKsA2QpwhgLhQ18+1URO8NwdgKqgk0k4hPU3iuq7p6DqwNQxfuRjCiqM2Gwr4kFRyegGP3o3/lUFqtSii76QDyNaxeKdqUQf8C+JkAZwQ9H1FhqrjiX7h411MEhPgRxwL5mNeLXALVHEtsD2MRHhnLqL37DR0Vt62kNVCN+Ax8K8Uk2PSXGwPkgfE7065IYTrDDp0vIaI2h5IOp11BN+6i9tJZR7yAouEBytlDxjp3aRr0D079BZdomGfl9348Yvb9W4QH+ZugifaGQzXpku32EejWvWoV3IHQAUm8m6aee1vo5z/OVBijShXuFKzn61tpxnufPqsO41gTG04kR3ceZ65f74Eh2H/mefbrkTB1sfG1wp/dvNBqNRqPRaDQajUaj0Wg0Go1Go9FoRFJk5us2KVOymzcnxYnvi/8rOT27ZlrSxo35k/sBtoENvjp8FMEPIUmPV07qTIE7oCPLdIpYIi0q7OvifU/vgVmZg3OJyxLGhVm2JTS8O1Ggww6AmaFDVXzJB/uaj12vJ6QWLsLIzFIelRpW8akaMKB0OcaU/Mh9MgY23Bs+nwiv9QELvkqX2+wf37q9FCwaYcOBYK+9gx32qm3u3WPv+mc/QKjQmQSb+Dsi/LOWTtMEXde9NbxnDRy3uXB7jbhTxftsEzdO0zSul6iYxJNlH3J0fQD4nQl9z8dC9k+9HIQc5dL3/WiM+Z0dJMbV31L8UKSblZuF78Y08W9ME//GNPFvTBP/xjTxb0wT/8Y08W9ME/+AaZqynXbJQVYLX8oBCikOkcXePx79Zh13YIx5bI9bu3rvkmATf7GVv/3NnSPr8eq9sXUK+Y4c2XO8zPM8bh1F8Nc/f2jj38YdLJ3tW4rwAMwjfxk9w+bPD484b4QEgCilvn1/93W60PtukWbrZ13zqWroWmvHE2Ew7ltV/d8QWMXHKsu6JiSGD+H0K5H1Adl3+6sOkDySYmrzug5w52qgW7JnwuzE7R+GcQGkB1ccfcLFBnCk5BWkHuuaQnbxt7R0LT6akefGlBrGJW5nXSL/A0aYr3eSw0sdAAAAAElFTkSuQmCC"/>
+    <div><div class="brand-title">ООП</div><div class="brand-sub">Объекто-ориентированный поиск</div></div>
+  </div>
+  <div class="product-tag">Поиск специалистов по компетенциям, задачам команды и подтверждённому опыту.</div>
+  <div class="role-box">
+    <label>ДЕМО-РОЛЬ</label>
+    <select id="roleSelect">
+      <option value="candidate">Талант</option>
+      <option value="employer">Работодатель</option>
+    </select>
+  </div>
+  <div id="navRoot"></div>
+  <div class="sidebar-foot">ООП · подтверждённые IT-профили<br>примеры ФСП и профилей — синтетические<br>сервер и AI не подключены</div>
+</aside>
+<main class="main">
+  <header class="topbar">
+    <div class="top-title" id="pageTitle">Обзор</div>
+    <div class="top-actions">
+      <div class="demo-role-switch">
+        <label for="roleSelectTop">DEMO ROLE</label>
+        <select id="roleSelectTop" onchange="switchDemoRole(this.value)">
+          <option value="candidate">Талант</option>
+          <option value="employer">Работодатель</option>
+        </select>
+      </div>
+      <span class="demo-pill" title="Данные хранятся в браузере. Сервер, почта и AI не подключены.">DEMO v13 · локально</span>
+      <button class="btn secondary sm" onclick="openDemoGuide()">Сценарий показа</button>
+      <button class="btn secondary sm" onclick="resetDemo()">Начать демо заново</button>
+    </div>
+  </header>
+  <div class="content">
+    <section class="screen active" id="candidate-dashboard">
+      <div id="candidateVerificationState" class="draft-banner ok"><b>Профиль подтверждён и участвует в подборе</b><div class="small">Обязательный путь пройден: профиль → специализация → грейд → тест.</div></div>
+      <div class="hero">
+        <div class="eyebrow">ООП / талант</div>
+        <div class="logo-oop">ОО<span>П</span></div>
+        <h1>Покажите свой опыт и подтвердите уровень.</h1>
+        <p>Профиль объединяет резюме, результаты тестирования и подтверждённые достижения ФСП. Работодатели сами находят талантов и отправляют предложения с зарплатой до начала общения.</p>
+        <div class="actions">
+          <button class="btn" onclick="go('candidate-resume')">Открыть резюме</button>
+          <button class="btn secondary" onclick="go('candidate-invitations')">Приглашения <span class="badge red" style="margin-left:6px">1</span></button>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card span8">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div><div class="eyebrow">Последнее приглашение</div><h3 style="margin:5px 0">EduTech · Backend Developer</h3><div class="small muted">250 000 — 320 000 ₽ · удалённо · получено сегодня</div></div>
+            <button class="btn sm" onclick="go('candidate-invitations')">Посмотреть предложение</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="small muted">Просмотры профиля за 7 дней</div><div class="kpi">14</div><div class="small muted">4 работодателя добавили в подборку</div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card"><div class="small muted">Статус верификации</div><div class="kpi" id="dashboardCategory">Backend / Middle</div><div class="stack" id="dashboardBadges"><span class="badge ok">VERIFIED</span><span class="badge gray">обновлено сегодня</span></div><div class="profile-progress" style="margin-top:12px"><div id="dashboardProgress" style="width:100%"></div></div></div>
+        <div class="card"><div class="small muted">Сила профиля</div><div class="kpi">88 / 100</div><div class="small muted">тест + ФСП + свежесть</div></div>
+        <div class="card"><div class="small muted">Достижения ФСП</div><div class="kpi">3</div><div class="small muted">2 призовых результата</div></div>
+        <div class="card full">
+          <h3>Как формируется профиль</h3>
+          <div class="demo-flow">
+            <div class="demo-node active"><b>1. Самооценка</b>специализация, уровень, пять шкал</div>
+            <div class="demo-node"><b>2. Резюме</b>опыт, проекты, навыки, ФСП</div>
+            <div class="demo-node"><b>3. Профессиональный тест</b>20 вопросов и проверка грейда</div>
+            <div class="demo-node"><b>4. Когнитивные задания</b>отдельные наблюдения</div>
+            <div class="demo-node"><b>5. Профиль</b>готов к поиску работодателями</div>
+            <div class="demo-node"><b>6. Приглашения</b>зарплата до контакта</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="candidate-resume">
+      <div class="resume-workspace">
+        <div class="form-hero">
+          <div>
+            <div class="eyebrow">Резюме</div>
+            <h2 style="margin:4px 0 5px">Один профиль — два режима</h2>
+            <div class="small muted">Редактируйте профессиональное резюме или переключитесь в режим публикации, чтобы увидеть его глазами работодателя.</div>
+          </div>
+          <div class="mode-switch">
+            <button id="resumeEditTab" class="active" onclick="setResumeMode('edit')">Редактирование</button>
+            <button id="resumePreviewTab" onclick="setResumeMode('preview')">Как увидит работодатель</button>
+          </div>
+        </div>
+
+        <div id="resumeEditMode" class="resume-mode active">
+          <div class="resume-edit-grid">
+            <div class="editor-main">
+              <div class="block-head">
+                <div><h2 style="margin:0">Алексей Смирнов</h2><p class="small muted">Backend-разработчик · Москва · открыт к предложениям</p></div>
+                <span class="save-state">✓ сохранено автоматически</span>
+              </div>
+
+              <div class="form-block">
+                <div class="block-head">
+                  <div><h3>Основная информация</h3><p class="small muted">Контакты будут скрыты до принятия приглашения.</p></div>
+                  <span class="optional-tag">основное</span>
+                </div>
+                <div class="cols2">
+                  <div class="field"><label for="v13Field7">Имя</label><input value="Алексей Смирнов" id="v13Field7"></div>
+                  <div class="field"><label for="v13Field8">Город и формат</label><input value="Москва · удалённо / гибрид" id="v13Field8"></div>
+                </div>
+                <div class="cols2">
+                  <div class="field"><label for="v13Field9">Email</label><input value="alexey@example.com" id="v13Field9"></div>
+                  <div class="field"><label for="v13Field10">Telegram</label><input value="@alexey_dev" id="v13Field10"></div>
+                </div>
+                <div class="field"><label for="v13Field11">Коротко о себе</label><textarea id="v13Field11">Backend-разработчик. Последние два года самостоятельно отвечаю за один из сервисов продукта. Интересуют API, PostgreSQL, производительность и архитектура.</textarea></div>
+              </div>
+
+              <div class="form-block featured">
+                <div class="block-head">
+                  <div><h3>Достижения ФСП</h3><p class="small muted">Соревнования, дисциплины и результаты ФСП — отдельный источник опыта.</p></div>
+                  <span class="badge ok">ФСП · демо</span>
+                </div>
+                <div class="fsp-feature">
+                  <div class="cols2">
+                    <div class="field"><label for="v13Field12">FSP ID</label><input value="FSP-18492" id="v13Field12"></div>
+                    <div class="field"><label for="v13Field13">Статус</label><input value="Демо · 3 события" readonly id="v13Field13"></div>
+                  </div>
+                  <div class="fsp-ach-grid">
+                    <div class="fsp-ach"><b>2 место</b><div class="small" style="color:#C7C9D0">Всероссийские соревнования · алгоритмическое программирование · 2025</div></div>
+                    <div class="fsp-ach"><b>Финалист</b><div class="small" style="color:#C7C9D0">Командное программирование · 2024</div></div>
+                  </div>
+                  <div class="inline-actions">
+                    <div class="tiny" style="color:#AEB0B9">Сохранённый пример ФСП. Интеграция с реестром не подключена.</div>
+                    <button class="btn secondary sm" onclick="toast('Показан сохранённый пример ФСП')">Обновить</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-block">
+                <div class="block-head">
+                  <div><h3>Специализация и грейд</h3><p class="small muted">Резюме помогает выбрать уровень, а тест делает его подтверждённым.</p></div>
+                  <span class="badge warn">Middle требует подтверждения</span>
+                </div>
+                <div class="cols3">
+                  <div class="field"><label for="v13Field14">Направление</label><select id="v13Field14"><option>Разработка ПО</option><option>Data / ML</option><option>Информационная безопасность</option></select></div>
+                  <div class="field"><label for="v13Field15">Специализация</label><select id="v13Field15"><option>Backend</option><option>Frontend</option></select></div>
+                  <div class="field"><label for="v13Field16">Заявленный грейд</label><select id="v13Field16"><option>Middle</option><option>Senior</option><option>Junior</option></select></div>
+                </div>
+                <div class="callout"><b>По резюме рекомендуем Middle</b><div class="small">4 года опыта, самостоятельная ответственность за сервис, Python/FastAPI/PostgreSQL.</div></div>
+                <div class="actions"><button class="btn" onclick="go('candidate-test')">Подтвердить Middle тестом</button><button class="btn secondary" onclick="toast('Резюме сохранено — тест можно пройти позже')">Пройти позже</button></div>
+              </div>
+
+              <div class="form-block">
+                <div class="block-head">
+                  <div><h3>Навыки</h3><p class="small muted">Выберите навыки из готовых пресетов. Тест проверяет профессиональные компетенции; отдельные технологии остаются заявленными.</p></div>
+                  <button class="btn secondary sm" onclick="toast('В этой версии доступны готовые пресеты навыков')">Другой навык</button>
+                </div>
+                <div class="presets">
+                  <button class="preset on">Python</button><button class="preset on">PostgreSQL</button><button class="preset on">FastAPI</button>
+                  <button class="preset on">REST API</button><button class="preset">Redis</button><button class="preset">Kafka</button>
+                  <button class="preset">Docker</button><button class="preset">Kubernetes</button><button class="preset">Git</button>
+                </div>
+                <div style="margin-top:13px">
+                  <div class="skill-row-v12"><div class="skill-name"><b>Python</b><span>4 года · проверено в Backend-тесте</span></div><div><span class="badge ok">подтверждено</span></div></div>
+                  <div class="skill-row-v12"><div class="skill-name"><b>PostgreSQL</b><span>3 года · блок Data/SQL 82%</span></div><div><span class="badge ok">подтверждено</span></div></div>
+                  <div class="skill-row-v12"><div class="skill-name"><b>FastAPI</b><span>2 года · найдено в опыте</span></div><div class="skill-actions"><span class="badge gray">заявлено</span><button class="btn secondary sm" onclick="toast('Отдельного банка FastAPI в MVP нет')">Подтвердить</button></div></div>
+                </div>
+              </div>
+
+              <div class="form-block" id="selfAssessmentBlock">
+ <div class="block-head"><div><h3>Самооценка</h3><p class="small muted">Исходная гипотеза перед тестом. Ответы сохраняются в резюме и не добавляют баллы грейда.</p></div><span id="selfStatus" class="badge gray">Не завершена</span></div>
+ <div id="selfScales"></div><div id="selfBehavior" class="self-behavior"></div>
+ <div class="actions"><button class="btn secondary" onclick="v13CompleteSelf()">Сохранить самооценку</button><button class="btn ghost" onclick="v13Defer('self')">Пройти блок позже</button></div>
+ <div id="selfFeedback" class="field-error" role="status"></div>
+</div>
+<div class="form-block">
+                <div class="block-head">
+                  <div><h3>Профессиональные практики</h3><p class="small muted">То, что часто теряется в обычном резюме, но важно для инженерной роли.</p></div>
+                  <span class="optional-tag">пресеты</span>
+                </div>
+                <div class="presets">
+                  <button class="preset on">Code review</button><button class="preset on">Peer review</button>
+                  <button class="preset on">Debugging production</button><button class="preset on">API design</button>
+                  <button class="preset">System design</button><button class="preset">Менторинг</button>
+                  <button class="preset">Incident response</button><button class="preset">Performance profiling</button>
+                </div>
+              </div>
+
+              <div class="form-block">
+                <div class="block-head">
+                  <div><h3>Опыт работы</h3><p class="small muted">Сохранённый пример опыта и результатов. Редактор дополнительных записей ещё не подключён.</p></div>
+                  <button class="btn secondary sm" onclick="toast('Редактор дополнительного опыта ещё не подключён')">+ Добавить опыт</button>
+                </div>
+                <div class="resume-role">
+                  <div class="resume-role-top"><div><h4>Backend Developer · ProductLab</h4><div class="small muted">2023 — сейчас · 2 года 8 месяцев</div></div><span class="badge">текущая</span></div>
+                  <ul class="resume-bullets">
+                    <li>Отвечаю за backend одного B2B-сервиса и публичные API.</li>
+                    <li>Оптимизировал тяжёлые запросы PostgreSQL и сократил p95 latency.</li>
+                    <li>Проектировал интеграции, участвовал в code review и разборе инцидентов.</li>
+                  </ul>
+                  <div class="presets"><button class="preset on">Python</button><button class="preset on">FastAPI</button><button class="preset on">PostgreSQL</button><button class="preset on">Redis</button></div>
+                </div>
+                <div class="resume-role">
+                  <div class="resume-role-top"><div><h4>Junior Backend Developer · DevStudio</h4><div class="small muted">2021 — 2023</div></div></div>
+                  <ul class="resume-bullets"><li>Внутренние сервисы, интеграции, SQL и фоновые задачи.</li></ul>
+                </div>
+              </div>
+
+              <div class="form-block">
+                <div class="block-head">
+                  <div><h3>Импорт из PDF</h3><p class="small muted">Импорт PDF — следующий этап разработки. В демо файл показан как пример.</p></div>
+                  <span class="badge gray">alexey_smirnov_backend.pdf</span>
+                </div>
+                <div class="actions"><button class="btn secondary" onclick="toast('Импорт PDF ещё не подключён')">Распознать заново</button><button class="btn secondary" onclick="toast('Экспорт PDF ещё не подключён')">Скачать PDF ООП</button></div>
+              </div>
+
+              <div class="form-actions-bar">
+                <div><b class="small">Резюме заполнено на 92%</b><div class="tiny muted">Изменения сохраняются автоматически.</div></div>
+                <button class="btn" onclick="setResumeMode('preview')">Перейти к публикации</button>
+              </div>
+            </div>
+
+            <aside class="editor-aside">
+              <h3>Состояние профиля</h3>
+              <div class="preview-list">
+                <div class="preview-item"><b>ФСП</b><span class="small muted">2 достижения подтверждены</span></div>
+                <div class="preview-item"><b>Грейд</b><span class="small muted">Middle заявлен · тест не завершён</span></div>
+                <div class="preview-item"><b>Навыки</b><span class="small muted">2 подтверждены · 3 заявлены</span></div>
+                <div class="preview-item"><b>Видимость</b><span class="small muted">пока черновик</span></div>
+              </div>
+              <div class="divider"></div>
+              <h3>Что усилить</h3>
+              <div class="small muted">Подтвердите грейд и FastAPI — это повысит силу профиля и число подходящих подборок.</div>
+              <div class="actions"><button class="btn sm" onclick="go('candidate-test')">Пройти тест</button></div>
+            </aside>
+          </div>
+        </div>
+
+        <div id="resumePreviewMode" class="resume-mode">
+          <div class="publication-paper">
+            <div class="pub-head">
+              <div>
+                <div class="eyebrow">Публичное резюме</div>
+                <h1 style="font-size:30px;margin:5px 0">Алексей Смирнов</h1>
+                <div class="small muted">Backend Developer · Middle · Москва / удалённо</div>
+                <div class="verification-strip"><span class="badge warn">Middle · ожидает тест</span><span class="badge ok">ФСП · подтверждено</span><span class="badge gray">активен сегодня</span></div>
+              </div>
+              <div style="text-align:right"><div class="score">88</div><div class="tiny muted">сила профиля</div></div>
+            </div>
+
+            <div class="pub-section">
+              <h3>Достижения ФСП</h3>
+              <div class="cols2">
+                <div class="achievement"><div class="icon">2</div><div><b>2 место</b><div class="small muted">Всероссийские соревнования · алгоритмическое программирование · 2025</div></div></div>
+                <div class="achievement"><div class="icon">F</div><div><b>Финалист</b><div class="small muted">Командное программирование · 2024</div></div></div>
+              </div>
+            </div>
+
+            <div class="pub-section">
+              <h3>О себе</h3>
+              <p class="small muted">Backend-разработчик с опытом B2B-продуктов, API, PostgreSQL и задач производительности. Последние два года самостоятельно отвечаю за один из сервисов продукта.</p>
+            </div>
+
+            <div class="pub-section">
+              <h3>Навыки</h3>
+              <div class="vacancy-tags"><span class="badge ok">Python ✓</span><span class="badge ok">PostgreSQL ✓</span><span class="badge gray">FastAPI</span><span class="badge gray">REST API</span><span class="badge gray">Redis</span></div>
+              <h3 style="margin-top:16px">Инженерные практики</h3>
+              <div class="vacancy-tags"><span class="badge">Code review</span><span class="badge">Peer review</span><span class="badge">API design</span><span class="badge">Debugging production</span></div>
+            </div>
+
+            <div class="pub-section">
+              <h3>Опыт</h3>
+              <div class="pub-experience"><b>Backend Developer · ProductLab</b><div class="small muted">2023 — сейчас</div><p class="small">Ответственность за backend-сервис, публичные API, оптимизация PostgreSQL, интеграции и code review.</p></div>
+              <div class="pub-experience"><b>Junior Backend Developer · DevStudio</b><div class="small muted">2021 — 2023</div><p class="small">Внутренние сервисы, SQL, фоновые задачи и интеграции.</p></div>
+            </div>
+
+            <div class="pub-section">
+              <div class="verify-band"><div><b>Публикация профиля</b><div class="small muted">Можно сохранить локальный предпросмотр без подтверждённого грейда. Публикация на сервере ещё не подключена.</div></div><button class="btn" onclick="publishResume()">Сохранить предпросмотр</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="candidate-test"></section>
+    <section class="screen" id="candidate-test-result"></section>
+<section class="screen" id="candidate-test-question"></section>
+<section class="screen" id="candidate-cognitive"></section>
+    
+    <section class="screen" id="candidate-invitations"></section>
+    <section class="screen" id="candidate-vacancies">
+      <div class="vacancy-listing">
+        <div>
+          <div class="form-hero">
+            <div><div class="eyebrow">Вакансии</div><h2 style="margin:4px 0 5px">Подходящие предложения</h2><div class="small muted">Зарплата указана до отклика. Карточки показывают категорию, стек, формат и причину соответствия вашему профилю.</div></div>
+            <span class="badge ok">12 подходят профилю</span>
+          </div>
+          <div class="vacancy-card" onclick="openVacancy('edutech')">
+            <div class="vacancy-card-top">
+              <div style="display:flex;gap:12px">
+                <div class="company-mark">E</div>
+                <div><h3 class="vacancy-title">Backend Developer · EduTech</h3><div class="small muted">B2B SaaS · продуктовая команда · Москва / удалённо</div></div>
+              </div>
+              <div class="salary">250–320 тыс. ₽</div>
+            </div>
+            <div class="vacancy-tags"><span class="badge">Backend</span><span class="badge">Middle+</span><span class="badge gray">Python</span><span class="badge gray">PostgreSQL</span><span class="badge gray">FastAPI</span></div>
+            <p class="small">Возьмёте один backend-сервис, переработаете часть API и поможете снизить нагрузку на PostgreSQL.</p>
+            <div class="callout ok"><b>92% соответствия</b><div class="small">Совпадает категория, Python/PostgreSQL подтверждены, в опыте есть самостоятельная ответственность за сервис.</div></div>
+            <div class="actions"><button class="btn" onclick="event.stopPropagation();openVacancy('edutech')">Посмотреть вакансию</button><button class="btn secondary" onclick="event.stopPropagation();toast('Вакансия сохранена')">Сохранить</button></div>
+          </div>
+          <div class="vacancy-card" onclick="openVacancy('fintech')">
+            <div class="vacancy-card-top">
+              <div style="display:flex;gap:12px">
+                <div class="company-mark">F</div>
+                <div><h3 class="vacancy-title">Python Backend Engineer · FinCore</h3><div class="small muted">FinTech · платёжная платформа · Санкт-Петербург / удалённо</div></div>
+              </div>
+              <div class="salary">280–350 тыс. ₽</div>
+            </div>
+            <div class="vacancy-tags"><span class="badge">Backend</span><span class="badge">Middle / Senior</span><span class="badge gray">Python</span><span class="badge gray">Kafka</span><span class="badge gray">PostgreSQL</span></div>
+            <p class="small">Интеграции, событийная обработка и надёжность платёжных сервисов.</p>
+            <div class="callout"><b>84% соответствия</b><div class="small">Сильный backend-профиль, но Kafka пока не подтверждена.</div></div>
+            <div class="actions"><button class="btn" onclick="event.stopPropagation();openVacancy('fintech')">Посмотреть вакансию</button><button class="btn secondary" onclick="event.stopPropagation();toast('Вакансия сохранена')">Сохранить</button></div>
+          </div>
+          <div class="vacancy-card" onclick="openVacancy('cloud')">
+            <div class="vacancy-card-top">
+              <div style="display:flex;gap:12px">
+                <div class="company-mark">C</div>
+                <div><h3 class="vacancy-title">Platform Backend Developer · CloudOps</h3><div class="small muted">Developer tools · распределённая команда</div></div>
+              </div>
+              <div class="salary">240–300 тыс. ₽</div>
+            </div>
+            <div class="vacancy-tags"><span class="badge">Backend</span><span class="badge">Middle</span><span class="badge gray">Python</span><span class="badge gray">Docker</span><span class="badge gray">Kubernetes</span></div>
+            <p class="small">Внутренние сервисы разработчиков, автоматизация и платформенные инструменты.</p>
+            <div class="callout"><b>76% соответствия</b><div class="small">Подходит Python, но Kubernetes и platform experience в профиле пока не подтверждены.</div></div>
+            <div class="actions"><button class="btn" onclick="event.stopPropagation();openVacancy('cloud')">Посмотреть вакансию</button><button class="btn secondary" onclick="event.stopPropagation();toast('Вакансия сохранена')">Сохранить</button></div>
+          </div>
+        </div>
+        <aside class="vacancy-side">
+          <div class="side-panel">
+            <h3>Фильтры</h3>
+            <div class="field"><label for="v13Field17">Специализация</label><select id="v13Field17"><option>Backend</option><option>Frontend</option></select></div>
+            <div class="field"><label for="v13Field18">Грейд</label><select id="v13Field18"><option>Middle и выше</option><option>Middle</option><option>Senior</option></select></div>
+            <div class="field"><label for="v13Field19">Зарплата от</label><input value="220 000 ₽" id="v13Field19"></div>
+            <div class="field"><label for="v13Field20">Формат</label><select id="v13Field20"><option>Любой</option><option>Удалённо</option><option>Гибрид</option><option>Офис</option></select></div>
+            <div class="field"><label for="v13Field21">Стек</label><input value="Python, PostgreSQL" id="v13Field21"></div>
+            <button class="btn" style="width:100%" onclick="toast('Фильтры применены')">Применить</button>
+          </div>
+          <div class="callout" style="margin-top:12px"><b>Почему эти вакансии выше</b><div class="small">Мы учитываем подтверждённую категорию, навыки, опыт из резюме и условия вакансии. Зарплата всегда показывается до отклика.</div></div>
+        </aside>
+      </div>
+    </section>
+    <section class="screen" id="candidate-vacancy-detail">
+      <div class="vacancy-detail-hero">
+        <div>
+          <div class="eyebrow">EduTech · вакансия</div>
+          <h1 id="vacancyDetailTitle" style="font-size:30px;margin:6px 0 7px">Backend Developer</h1>
+          <div id="vacancyDetailCompany" class="small muted">EduTech · B2B SaaS · Москва / удалённо</div>
+          <div class="vacancy-tags"><span class="badge">Backend</span><span class="badge">Middle+</span><span class="badge gray">Python</span><span class="badge gray">FastAPI</span><span class="badge gray">PostgreSQL</span></div>
+        </div>
+        <div style="text-align:right"><div id="vacancyDetailSalary" class="salary" style="font-size:24px">250–320 тыс. ₽</div><div class="small muted">на руки · до начала общения</div></div>
+      </div>
+      <div class="vacancy-detail-grid">
+        <article class="prose-card">
+          <div class="callout ok"><b>92% соответствия вашему профилю</b><div class="small">Подтверждённый Backend Middle, Python/PostgreSQL и похожий опыт эксплуатации сервиса. FastAPI указан в резюме, но отдельно не подтверждён.</div></div>
+          <h3>О продукте</h3>
+          <p class="small muted">EduTech развивает B2B-платформу для корпоративного обучения и оценки сотрудников. Продукт быстро растёт, поэтому команда усиливает backend-направление.</p>
+          <h3>Что предстоит делать</h3>
+          <ul>
+            <li>Взять ответственность за один из backend-сервисов.</li>
+            <li>Развивать публичные и внутренние API.</li>
+            <li>Диагностировать узкие места PostgreSQL и улучшать производительность.</li>
+            <li>Участвовать в архитектурных решениях вместе с Tech Lead.</li>
+            <li>Проводить code review и участвовать в разборе инцидентов.</li>
+          </ul>
+          <h3>Что важно</h3>
+          <ul>
+            <li>Коммерческий Python и опыт backend-разработки.</li>
+            <li>PostgreSQL: запросы, индексы, анализ производительности.</li>
+            <li>REST API и понимание HTTP.</li>
+            <li>Опыт эксплуатации своего кода в рабочей среде.</li>
+            <li>Умение самостоятельно предлагать решение, а не ждать полной декомпозиции.</li>
+          </ul>
+          <h3>Будет плюсом</h3>
+          <ul>
+            <li>FastAPI, Redis, Kafka.</li>
+            <li>Опыт с растущей нагрузкой.</li>
+            <li>Соревнования или другие подтверждённые инженерные достижения.</li>
+          </ul>
+          <h3>Команда и процесс</h3>
+          <p class="small muted">6 разработчиков, Tech Lead, QA и Product Manager. Tech Lead задаёт технические рамки, но ожидается самостоятельность в выборе и защите решений.</p>
+          <h3>Условия</h3>
+          <div class="cols2">
+            <div class="preview-item"><b>Формат</b><span class="small muted">Удалённо по РФ · ±3 часа от МСК</span></div>
+            <div class="preview-item"><b>Занятость</b><span class="small muted">Полный день</span></div>
+            <div class="preview-item"><b>Оформление</b><span class="small muted">ТК РФ</span></div>
+            <div class="preview-item"><b>Срок выхода</b><span class="small muted">В течение месяца</span></div>
+          </div>
+        </article>
+        <aside class="offer-card">
+          <div class="company-summary"><div class="company-mark">E</div><div><b>EduTech</b><div class="tiny muted">B2B SaaS · 50–200 сотрудников</div></div></div>
+          <div class="divider"></div>
+          <div class="small muted">Ваше соответствие</div><div class="score">92%</div>
+          <div class="preview-list">
+            <div class="preview-item"><b>✓ Категория</b><span class="small muted">Backend / Middle соответствует</span></div>
+            <div class="preview-item"><b>✓ PostgreSQL</b><span class="small muted">подтверждён тестом</span></div>
+            <div class="preview-item"><b>✓ Опыт</b><span class="small muted">есть ответственность за backend-сервис</span></div>
+            <div class="preview-item"><b>△ FastAPI</b><span class="small muted">есть в резюме, но не подтверждён отдельно</span></div>
+          </div>
+          <div class="divider"></div>
+          <button class="btn" style="width:100%" onclick="applyDetailedVacancy()">Откликнуться</button>
+          <button class="btn secondary" style="width:100%;margin-top:8px" onclick="toast('Вакансия сохранена')">Сохранить вакансию</button>
+          <div class="small muted" style="margin-top:12px">После отклика работодатель увидит ваши контакты согласно правилам платформы.</div>
+        </aside>
+      </div>
+    </section>
+    <section class="screen" id="candidate-applications">
+      <div class="card full">
+        <div class="panel-head">
+          <div><div class="eyebrow">Мои отклики</div><h2 class="panel-title">Статусы вакансий, на которые вы откликнулись</h2><p class="panel-sub">Здесь видно, что происходит после самостоятельного отклика.</p></div>
+        </div>
+        <div class="candidate">
+          <div>
+            <div class="stack"><span class="badge">EduTech</span><span class="badge gray">Backend · Middle+</span></div>
+            <h3 style="margin:9px 0 4px">Backend Developer</h3>
+            <div class="small muted">250–320 тыс. ₽ · удалённо · отклик отправлен сегодня</div>
+          </div>
+          <div><span class="badge warn">отправлено</span></div>
+        </div>
+        <div class="candidate">
+          <div>
+            <div class="stack"><span class="badge">ProductLab</span><span class="badge gray">Backend · Middle</span></div>
+            <h3 style="margin:9px 0 4px">Python Backend Developer</h3>
+            <div class="small muted">220–280 тыс. ₽ · удалённо · работодатель открыл профиль</div>
+          </div>
+          <div><span class="badge">просмотрено</span></div>
+        </div>
+        <div class="candidate">
+          <div>
+            <div class="stack"><span class="badge">CloudOps</span><span class="badge gray">Backend · Middle</span></div>
+            <h3 style="margin:9px 0 4px">Platform Backend Developer</h3>
+            <div class="small muted">240–300 тыс. ₽ · вакансия сохранена</div>
+          </div>
+          <div><span class="badge gray">сохранено</span></div>
+        </div>
+      </div>
+    </section>
+<section class="screen" id="candidate-settings">
+      <div class="intake-shell">
+        <div class="form-panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow">Талант · настройки</div>
+              <h2 class="panel-title">Управляйте видимостью и контактами</h2>
+              <p class="panel-sub">Здесь вы контролируете, какие части профиля участвуют в поиске и что увидит работодатель до принятия приглашения.</p>
+            </div>
+          </div>
+          <div class="section-group">
+            <div class="group-title"><div class="dot-icon">✓</div><b>Видимость профиля</b></div>
+            <div class="toggle-row"><div><b class="small">Показывать работодателям опыт и стек</b><div class="tiny muted">основа поиска</div></div><div class="switch on"></div></div>
+            <div class="toggle-row"><div><b class="small">Показывать достижения ФСП</b><div class="tiny muted">подтверждённый сигнал</div></div><div class="switch on"></div></div>
+            <div class="toggle-row"><div><b class="small">Показывать имя до приглашения</b><div class="tiny muted">контакты всё равно закрыты</div></div><div class="switch"></div></div>
+            <div class="toggle-row"><div><b class="small">Готов к предложениям</b><div class="tiny muted">талант виден в общей выдаче</div></div><div class="switch on"></div></div>
+            <div class="divider"></div>
+            <div class="toggle-row"><div><b class="small">Согласие на обработку данных</b><div class="tiny muted">необходимо для работы профиля</div></div><div class="switch on"></div></div>
+            <div class="toggle-row"><div><b class="small">Согласие на публикацию выбранных данных</b><div class="tiny muted">управляется настройками видимости выше</div></div><div class="switch on"></div></div>
+          </div>
+          <div class="section-group soft-purple">
+            <div class="group-title"><div class="dot-icon">@</div><b>Контакты</b></div>
+            <div class="choice-grid">
+              <div class="field"><label for="v13Field22">Email</label><input value="alexey@example.com" id="v13Field22"></div>
+              <div class="field"><label for="v13Field23">Telegram</label><input value="@alexey_dev" id="v13Field23"></div>
+            </div>
+            <div class="field"><label for="v13Field24">FSP ID</label><input value="FSP-18492" id="v13Field24"></div>
+          </div>
+          <div class="form-actions-bar">
+            <div class="small muted">Контакты таланта всё равно остаются скрытыми до принятия приглашения.</div>
+            <button class="btn" onclick="toast('Настройки сохранены')">Сохранить изменения</button>
+          </div>
+        </div>
+        <div class="side-panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow">Предпросмотр политики приватности</div>
+              <h3 class="panel-title" style="font-size:18px">Что именно откроется работодателю</h3>
+            </div>
+          </div>
+          <div class="preview-list">
+            <div class="preview-item"><b>До приглашения</b><span class="small muted">стек, подтверждённые навыки, результаты теста, достижения ФСП и краткий опыт.</span></div>
+            <div class="preview-item"><b>После приглашения, но до принятия</b><span class="small muted">зарплата, описание роли и контакт работодателя.</span></div>
+            <div class="preview-item"><b>После принятия</b><span class="small muted">email и Telegram таланта.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="employer-dashboard">
+      <div class="hero">
+        <div class="eyebrow">ООП / работодатель</div>
+        <h1>Опишите задачу, которую должен решить специалист.</h1>
+        <p>ООП превращает свободное описание продукта, команды и будущих задач в структурированную потребность, а затем ранжирует талантов по релевантности и силе подтверждённого профиля.</p>
+        <div class="actions"><button class="btn" onclick="go('employer-need')">Описать потребность</button><button class="btn secondary" onclick="go('employer-search')">Банк талантов</button></div>
+      </div>
+      <div class="grid">
+        <div class="card span8">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div><div class="eyebrow">Активная потребность</div><h3 style="margin:5px 0">Backend для растущего B2B SaaS</h3><div class="small muted">Middle+ / Senior · 12 подходящих талантов · обновлено сегодня</div></div>
+            <button class="btn sm" onclick="go('employer-search')">Открыть подборку</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="small muted">Новые ответы на приглашения</div><div class="kpi">2</div><div class="small muted">1 принято · 1 просмотрено</div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card"><div class="small muted">Активные потребности</div><div class="kpi">2</div></div>
+        <div class="card"><div class="small muted">В шорт-листах</div><div class="kpi">18</div></div>
+        <div class="card"><div class="small muted">Принятые приглашения</div><div class="kpi">3</div></div>
+        <div class="card full">
+          <h3>Как работает подбор</h3>
+          <div class="demo-flow">
+            <div class="demo-node active"><b>1. Задача</b>контекст и будущая работа</div>
+            <div class="demo-node"><b>2. AI-структуризация</b>структурированные признаки</div>
+            <div class="demo-node"><b>3. Категории</b>специализация / грейд</div>
+            <div class="demo-node"><b>4. Ранжирование</b>соответствие или сила профиля</div>
+            <div class="demo-node"><b>5. Приглашение</b>зарплата обязательна</div>
+            <div class="demo-node"><b>6. Контакт</b>раскрывается после принятия</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="employer-company">
+      <div class="intake-shell">
+        <div class="form-panel">
+          <div class="panel-head">
+            <div>
+              <div class="eyebrow">Работодатель · профиль</div>
+              <h2 class="panel-title">Соберите понятный и доверительный профиль компании</h2>
+              <p class="panel-sub">Заполните основные сведения о компании и контакт, который талант увидит вместе с приглашением.</p>
+            </div>
+            <span class="badge">используется в приглашениях</span>
+          </div>
+          <div class="section-group">
+            <div class="group-title"><div class="dot-icon">1</div><b>Основная информация</b></div>
+            <div class="choice-grid">
+              <div class="field"><label for="v13Field25">Компания</label><input value="EduTech" id="v13Field25"></div>
+              <div class="field"><label for="v13Field26">Сайт / домен</label><input value="edutech.example" id="v13Field26"></div>
+            </div>
+            <div class="field"><label for="v13Field27">Чем занимаетесь</label><textarea id="v13Field27">Образовательная B2B SaaS-платформа. Автоматизируем обучение и оценку сотрудников крупных компаний.</textarea></div>
+            <div class="cols3">
+              <div class="field"><label for="v13Field28">Размер компании</label><select id="v13Field28"><option>50–200 сотрудников</option><option>до 50</option><option>200–1000</option><option>1000+</option></select></div>
+              <div class="field"><label for="v13Field29">Стадия</label><select id="v13Field29"><option>Быстрый рост</option><option>Ранний продукт</option><option>Зрелый продукт</option></select></div>
+              <div class="field"><label for="v13Field30">Домен</label><input value="EdTech / B2B SaaS" id="v13Field30"></div>
+            </div>
+          </div>
+          <div class="section-group soft-purple">
+            <div class="group-title"><div class="dot-icon">@</div><b>Контакт для таланта</b></div>
+            <div class="choice-grid">
+              <div class="field"><label for="v13Field31">Имя и роль</label><input value="Анна Миронова · Tech Lead" id="v13Field31"></div>
+              <div class="field"><label for="v13Field32">Email / Telegram</label><input value="anna@edutech.example · @anna_mironova" id="v13Field32"></div>
+            </div>
+            <div class="field"><label for="v13Field33">Короткое обещание бренда работодателя</label><input value="Прозрачный найм, понятные задачи и уважение к инженерной самостоятельности" id="v13Field33"></div>
+          </div>
+          <div class="form-actions-bar">
+            <div class="small muted">Эти данные будут использованы в карточке предложения автоматически.</div>
+            <button class="btn" onclick="toast('Профиль компании сохранён');go('employer-need')">Сохранить и создать потребность</button>
+          </div>
+        </div>
+        <div class="side-panel">
+          <div class="micro-illustration">
+            <div class="orb one"></div><div class="orb two"></div>
+            <div class="node n1"></div><div class="node n2"></div><div class="node n3"></div>
+            <div class="line l1"></div><div class="line l2"></div>
+            <div class="caption">компания → потребность → талант<small>от профиля компании к точному приглашению</small></div>
+          </div>
+          <div class="brand-card">
+            <div class="eyebrow" style="color:#CFC9FF">Как компания выглядит для таланта</div>
+            <div class="logo">Edu<span>Tech</span></div>
+            <div class="small" style="opacity:.82;margin-top:8px">B2B SaaS для обучения и оценки сотрудников</div>
+            <div class="stat-grid">
+              <div class="stat-card dark"><b>50–200</b><span class="tiny">размер компании</span></div>
+              <div class="stat-card dark"><b>удалённо / гибрид</b><span class="tiny">формат найма</span></div>
+              <div class="stat-card dark"><b>6 разработчиков</b><span class="tiny">команда продукта</span></div>
+              <div class="stat-card dark"><b>Технический контакт</b><span class="tiny">Анна Миронова</span></div>
+            </div>
+          </div>
+          <div class="preview-list" style="margin-top:12px">
+            <div class="preview-item"><b>В приглашении</b><span class="small muted">Талант увидит название компании, краткое описание, условия и контакт представителя.</span></div>
+            <div class="preview-item"><b>Статус профиля</b><span class="small muted">Основные сведения заполнены. Профиль готов для отправки приглашений.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="employer-need">
+      <div class="form-hero">
+        <div>
+          <div class="eyebrow">Новая потребность</div>
+          <h2 style="margin:4px 0 5px">Что за человек нужен команде?</h2>
+          <div class="small muted">Обязательна только зарплата. Остальное можно заполнить частично или выбрать пресет. В демо AI не подключён: неизвестные поля сохраняются как неизвестные.</div>
+        </div>
+        <div class="actions" style="margin:0">
+          <button class="btn secondary sm" onclick="clearNeedForm()">Очистить пример</button>
+          <span class="badge">черновик сохраняется</span>
+        </div>
+      </div>
+
+      <div class="need-shell">
+        <div class="need-main">
+          <div class="callout" style="margin-bottom:14px">
+            <b>Контекст компании уже подставлен из профиля</b>
+            <div class="small">EduTech · EdTech / B2B SaaS · 50–200 сотрудников · быстрый рост. Эти данные не нужно вводить для каждой потребности.</div>
+          </div>
+
+          <div class="form-block featured">
+            <div class="block-head"><div><h3>Быстрый старт</h3><p class="small muted">Выберите ближайший сценарий — поля ниже подстроятся, а вы сможете всё изменить.</p></div><span class="optional-tag">необязательно</span></div>
+            <div class="quick-templates">
+              <button class="template-card" onclick="applyNeedPreset('scale')"><b>Backend для роста</b><span class="tiny muted">API · PostgreSQL · производительность</span></button>
+              <button class="template-card" onclick="applyNeedPreset('integration')"><b>Интеграционный Backend</b><span class="tiny muted">API · очереди · внешние системы</span></button>
+              <button class="template-card" onclick="applyNeedPreset('platform')"><b>Platform / Infra Backend</b><span class="tiny muted">внутренние сервисы · автоматизация</span></button>
+            </div>
+          </div>
+
+          <div class="form-block">
+            <div class="block-head"><div><h3>Роль и результат</h3><p class="small muted">Можно начать с одного предложения.</p></div><span class="optional-tag">необязательно</span></div>
+            <div class="cols2">
+              <div class="field"><label for="needRole">Название роли</label><input id="needRole" value="Backend Developer"></div>
+              <div class="field"><label for="needWhen">Когда нужен человек</label><select id="needWhen"><option>В течение месяца</option><option>Срочно</option><option>Без жёсткого срока</option></select></div>
+            </div>
+            <div class="field"><label for="needOutcome">Что должен изменить или сделать человек?</label><textarea id="needOutcome">Взять ответственность за один backend-сервис, стабилизировать API и помочь снизить нагрузку на PostgreSQL.</textarea></div>
+          </div>
+
+          <div class="form-block">
+            <div class="block-head"><div><h3>Задачи</h3><p class="small muted">Выберите типовые задачи или добавьте контекст свободным текстом.</p></div><span class="optional-tag">необязательно</span></div>
+            <div class="presets">
+              <button class="preset on" onclick="togglePreset(this)">API design</button>
+              <button class="preset on" onclick="togglePreset(this)">SQL performance</button>
+              <button class="preset on" onclick="togglePreset(this)">Debugging production</button>
+              <button class="preset on" onclick="togglePreset(this)">Code review</button>
+              <button class="preset" onclick="togglePreset(this)">Peer review</button>
+              <button class="preset" onclick="togglePreset(this)">System design</button>
+              <button class="preset" onclick="togglePreset(this)">Интеграции</button>
+              <button class="preset" onclick="togglePreset(this)">Incident response</button>
+            </div>
+            <div class="field" style="margin-top:12px"><label for="needTasks">Дополнительный контекст</label><textarea id="needTasks">Сейчас основной риск — деградация latency на фоне роста. Не хотим большой переписывания системы.</textarea></div>
+          </div>
+
+          <div class="form-block">
+            <div class="block-head"><div><h3>Навыки и требования</h3><p class="small muted">Необязательные поля. Не нужно вводить стек строкой через запятую.</p></div><span class="optional-tag">необязательно</span></div>
+            <div class="field"><label for="needSpecialization">Технологии</label>
+              <div class="presets">
+                <button class="preset on" onclick="togglePreset(this)">Python</button><button class="preset on" onclick="togglePreset(this)">PostgreSQL</button>
+                <button class="preset on" onclick="togglePreset(this)">FastAPI</button><button class="preset" onclick="togglePreset(this)">Redis</button>
+                <button class="preset" onclick="togglePreset(this)">Kafka</button><button class="preset" onclick="togglePreset(this)">Docker</button>
+              </div>
+            </div>
+            <div class="cols2">
+              <div class="field"><label>Специализация</label><select id="needSpecialization"><option>Пусть предложит AI</option><option selected>Backend</option><option>Frontend</option></select></div>
+              <div class="field"><label for="needGrade">Ориентир по грейду</label><select id="needGrade"><option>Пусть предложит AI</option><option>Middle</option><option selected>Middle+ / Senior</option><option>Senior</option></select></div>
+            </div>
+            <div class="optional-block">
+              <div class="optional-head"><b class="small">Что обязательно?</b><span class="optional-tag">можно пропустить</span></div>
+              <div class="presets"><button class="preset on" onclick="togglePreset(this)">Production-опыт</button><button class="preset on" onclick="togglePreset(this)">Самостоятельность</button><button class="preset" onclick="togglePreset(this)">Kafka</button><button class="preset" onclick="togglePreset(this)">High-load</button></div>
+            </div>
+            <div class="optional-block">
+              <div class="optional-head"><b class="small">Чему можно научить внутри?</b><span class="optional-tag">можно пропустить</span></div>
+              <div class="presets"><button class="preset on" onclick="togglePreset(this)">Kafka</button><button class="preset on" onclick="togglePreset(this)">Домен EdTech</button><button class="preset on" onclick="togglePreset(this)">Внутренние сервисы</button></div>
+            </div>
+          </div>
+
+          <div class="form-block">
+            <div class="block-head"><div><h3>Условия</h3><p class="small muted">Зарплата обязательна и будет видна таланту до начала общения.</p></div><span class="badge red">зарплата обязательна</span></div>
+            <div class="cols3">
+              <div class="field"><label for="salaryFrom">От <span class="required-star">*</span></label><input id="salaryFrom" value="250 000 ₽"></div>
+              <div class="field"><label for="salaryTo">До <span class="required-star">*</span></label><input id="salaryTo" value="320 000 ₽"></div>
+              <div class="field"><label for="v13Field34">Формат</label><select id="v13Field34"><option>Удалённо</option><option>Гибрид</option><option>Офис</option></select></div>
+            </div>
+            <div class="cols2">
+              <div class="field"><label for="v13Field35">Локация / часовой пояс</label><input value="РФ · ±3 часа от МСК" id="v13Field35"></div>
+              <div class="field"><label for="v13Field36">Занятость</label><select id="v13Field36"><option>Полная</option><option>Проектная</option></select></div>
+            </div>
+          </div>
+
+          <div class="form-actions-bar">
+            <div class="small muted">Не заполненные поля сохраняются как неизвестные. Для точного подбора уточните специализацию и грейд.</div>
+            <button class="btn" onclick="analyzeNeedV12()">Собрать потребность и найти талантов</button>
+          </div>
+        </div>
+
+        <aside class="need-summary">
+          <div class="eyebrow">Предпросмотр</div>
+          <h3>Структура потребности</h3>
+          <div id="needFeedback" class="field-error" role="alert"></div><div id="needV12Summary" class="preview-list">
+            <div class="preview-item"><b>Backend Developer</b><span class="small muted">Backend · Middle+ / Senior</span></div>
+            <div class="preview-item"><b>Основной результат</b><span class="small muted">ownership сервиса, API, PostgreSQL performance</span></div>
+            <div class="preview-item"><b>Задачи</b><span class="small muted">API design · SQL performance · debugging · code review</span></div>
+            <div class="preview-item"><b>Условия</b><span class="small muted">250–320 тыс. ₽ · удалённо</span></div>
+          </div>
+          <div class="divider"></div>
+          <div class="small muted">Потребность сохранится локально и будет использована в подборе. Публикация вакансии ещё не подключена.</div>
+        </aside>
+      </div>
+    </section>
+    <section class="screen" id="employer-search">
+      <div class="form-hero">
+        <div>
+          <div class="eyebrow">Потребность #NEED-104</div>
+          <h2 style="margin:4px 0 5px">Backend Developer · EduTech</h2>
+          <div class="small muted">250–320 тыс. ₽ · Backend · Middle+ / Senior · API / PostgreSQL / самостоятельность</div>
+        </div>
+        <div class="tabs"><button id="rankNeed" class="tab active" onclick="setRanking('need')">По соответствию</button><button id="rankStrong" class="tab" onclick="setRanking('strong')">Сильные профили</button></div>
+      </div>
+
+      <div class="search-shell">
+        <aside class="filter-panel">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3 style="margin:0">Уточнить поиск</h3><button class="btn secondary sm" onclick="v13ResetFilters()">Сбросить</button></div>
+          <div class="filter-group">
+            <h4>Специализация</h4>
+            <label for="v13Field53" class="check-chip"><input type="radio" checked name="spec" id="v13Field37"><span>Backend</span></label>
+            <label class="check-chip"><input type="radio" name="spec" id="v13Field38"><span>Frontend</span></label>
+          </div>
+          <div class="filter-group">
+            <h4>Грейд</h4>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field39"><span>Middle</span></label>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field40"><span>Senior</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field41"><span>Junior</span></label>
+          </div>
+          <div class="filter-group">
+            <h4>Технологии</h4>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field42"><span>Python</span></label>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field43"><span>PostgreSQL</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field44"><span>FastAPI</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field45"><span>Kafka</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field46"><span>Redis</span></label>
+          </div>
+          <div class="filter-group">
+            <h4>Практики</h4>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field47"><span>API design</span></label>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field48"><span>Debugging</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field49"><span>Peer review</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field50"><span>System design</span></label>
+          </div>
+          <div class="filter-group">
+            <h4>Подтверждения</h4>
+            <label class="check-chip"><input type="checkbox" checked id="v13Field51"><span>Грейд подтверждён</span></label>
+            <label class="check-chip"><input type="checkbox" id="v13Field52"><span>Есть ФСП</span></label>
+          </div>
+          <button class="btn" style="width:100%" onclick="v13ApplyFilters()">Применить</button>
+        </aside>
+
+        <div class="search-results">
+          <div class="need-context">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:start;flex-wrap:wrap">
+              <div><b>Что важно сейчас</b><div class="small muted" style="margin-top:4px">API design · PostgreSQL performance · самостоятельность. Kafka можно доучить.</div></div>
+              <button class="btn secondary sm" onclick="go('employer-need')">Изменить потребность</button>
+            </div>
+            <div class="presets" style="margin-top:10px"><button id="kafkaToggle" class="preset" onclick="toggleKafka()">Kafka: можно доучить</button><button id="fspToggle" class="preset" onclick="toggleFspBoost()">ФСП: обычный вес</button></div>
+          </div>
+
+          <div class="shortlist-bar"><div><b class="small" id="candidateCount">Таланты в текущей выдаче</b><div class="tiny muted">Уточнение фильтров не удаляет сохранённых в шорт-листе.</div></div><span class="badge" id="shortlistCount">Шорт-лист: 0</span></div>
+          <div id="candidateList"></div>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="employer-candidate"></section>
+    <section class="screen" id="employer-invitations"></section>
+    <section class="screen" id="employer-vacancies">
+      <div class="grid">
+        <div class="card span8">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div class="eyebrow">Публичный найм</div><h2>Вакансии</h2></div><button class="btn" onclick="toast('Создана вакансия из текущей потребности')">+ Из потребности</button></div>
+          <div class="candidate"><div><b>Backend Developer</b><div class="small muted">250 000 — 320 000 ₽ · опубликована</div></div><div><span class="badge ok">3 отклика</span></div></div>
+          <div class="candidate"><div><b>Frontend Developer</b><div class="small muted">210 000 — 270 000 ₽ · черновик</div></div><div><span class="badge gray">черновик</span></div></div>
+        </div>
+        <div class="card">
+          <h3>Публикация из потребности</h3>
+          <p class="small muted">Любую сохранённую потребность можно опубликовать как вакансию. Условия и требования переносятся автоматически.</p>
+        </div>
+      </div>
+    </section>
+    <section class="screen" id="employer-applications">
+      <div class="card full">
+        <div class="eyebrow">Входящие</div><h2>Отклики на вакансии</h2>
+        <div class="candidate"><div><div class="candidate-top"><div class="mini-avatar">ЕК</div><div><b>Елена К. · Frontend Middle</b><div class="small muted">Отклик на Frontend Developer</div></div></div><div class="stack" style="margin-top:9px"><span class="badge ok">Frontend подтверждён</span><span class="badge">тест 82/100</span><span class="badge ok">контакт открыт по отклику</span></div><div class="tiny muted" style="margin-top:7px">elena@example.com · контакт доступен, потому что талант откликнулся сам</div></div><div><button class="btn sm" onclick="toast('Отклик принят в работу')">В работу</button></div></div>
+      </div>
+    </section>
+    <section class="screen" id="demo-validation">
+      <div class="hero">
+        <div class="eyebrow">Качество решения</div>
+        <h1>Контрольный набор для подбора и тестирования</h1>
+        <p>План валидации предусматривает фиксированный синтетический набор: 20 талантов, 6 потребностей и 120 пар «талант — потребность». Для тестирования используются эталонные профили Junior, Middle и Senior и несколько вариантов заданий одного уровня.</p>
+        <div class="actions"><button class="btn" onclick="runValidation()">Посмотреть план проверки</button></div>
+      </div>
+      <div class="grid">
+        <div class="card full">
+          <h2>Подбор талантов</h2>
+          <div class="metric-grid">
+            <div class="metric-card"><div class="label">Precision@5</div><div class="value" id="metricP5">—</div><div class="label">релевантных талантов в топ-5</div></div>
+            <div class="metric-card"><div class="label">Объяснимость</div><div class="value" id="metricExplain">—</div><div class="label">top-талантов имеют объяснение</div></div>
+            <div class="metric-card"><div class="label">Ошибки категории</div><div class="value" id="metricGate">—</div><div class="label">талантов вне подтверждённой категории</div></div>
+          </div>
+        </div>
+        <div class="card full">
+          <h2>Тестирование талантов</h2>
+          <div class="metric-grid">
+            <div class="metric-card"><div class="label">Стабильность грейда</div><div class="value" id="metricConsistency">—</div><div class="label">одинаковый грейд на разных вариантах</div></div>
+            <div class="metric-card"><div class="label">Средняя разница</div><div class="value" id="metricDelta">—</div><div class="label">балла между повторными попытками</div></div>
+            <div class="metric-card"><div class="label">Разделение уровней</div><div class="value" id="metricDisc">—</div><div class="label">различимость слабых и сильных профилей</div></div>
+          </div>
+        </div>
+        <div class="card span6">
+          <h3>Разметка подбора</h3>
+          <p class="small muted">Для каждой потребности предстоит разметить пары как «релевантен», «частично релевантен» или «нерелевантен». Это позволяет считать качество top-выдачи.</p>
+        </div>
+        <div class="card span6">
+          <h3>Проверка тестов</h3>
+          <p class="small muted">Одинаковые компетенции проверяются разными вариантами заданий. Реальные показатели ещё не измерены. UI-примеры не заменяют проверку оценщика.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+</div>
+<div class="modal-wrap" id="inviteModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div class="eyebrow">Без обязательной вакансии</div><h2 style="margin:4px 0 0">Приглашение таланту</h2></div><button class="btn secondary sm" onclick="closeInvite()">×</button></div>
+    <div class="divider"></div>
+    <div id="inviteFeedback" class="field-error" role="alert"></div><div class="cols2"><div class="field"><label>Зарплата от</label><input value="250 000 ₽" id="v13Field53"></div><div class="field"><label for="v13Field54">до</label><input value="320 000 ₽" id="v13Field54"></div></div>
+    <div class="field"><label for="v13Field55">Что предлагаем</label><textarea id="v13Field55">Возьмёте ответственность за backend одного из сервисов, поможете переработать API и улучшить работу с PostgreSQL. В команде 6 разработчиков и сильный Tech Lead.</textarea></div>
+    <div class="cols2"><div class="field"><label for="v13Field56">Формат</label><select id="v13Field56"><option>Удалённо</option><option>Гибрид</option><option>Офис</option></select></div><div class="field"><label for="v13Field57">Способ связи работодателя</label><input value="@anna_mironova" id="v13Field57"></div></div>
+    <div class="actions"><button class="btn" onclick="sendInvite()">Отправить приглашение</button><button class="btn secondary" onclick="closeInvite()">Отмена</button></div>
+  </div>
+</div>
+<div class="modal-wrap" id="demoModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 style="margin:0">Сценарий демонстрации</h2><button class="btn secondary sm" onclick="closeDemoGuide()">×</button></div>
+    <div class="divider"></div>
+    <ol class="small" style="line-height:1.9;padding-left:20px">
+      <li><b>Регистрация:</b> выбрать роль → подтвердить email.</li>
+      <li><b>Талант:</b> резюме → достижения ФСП → специализация/грейд → тест сейчас или позже → режим публикации.</li>
+      <li><b>Оценка:</b> 10+5+5, отложить вопрос и вернуться. Открытые ответы ожидают проверки; результаты доступны как маркированные примеры.</li><li><b>Когнитивные задания:</b> шесть шагов, пауза и отдельные предварительные наблюдения.</li>
+      <li><b>Работодатель:</b> профиль компании → новая потребность → локальный разбор заполненных полей.</li>
+      <li><b>Подбор:</b> сравнить «По потребности» и «Сильные профили», уточнить требования без потери шорт-листа.</li>
+      <li><b>Контакт:</b> отправить приглашение с зарплатой → принять от лица таланта → показать раскрытие контакта.</li>
+      <li><b>Дополнительно:</b> публикация вакансии и самостоятельный отклик таланта.</li>
+    </ol>
+    <div class="actions"><button class="btn" onclick="closeDemoGuide();go('demo-validation')">Открыть показатели качества</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let authRole='candidate';
+function selectAuthRole(r){
+  authRole=r;
+  document.getElementById('authCandidate').classList.toggle('active',r==='candidate');
+  document.getElementById('authEmployer').classList.toggle('active',r==='employer');
+  const email=document.getElementById('authEmail');
+  if(r==='employer' && email.value==='alexey@example.com') email.value='anna@edutech.example';
+  if(r==='candidate' && email.value==='anna@edutech.example') email.value='alexey@example.com';
+}
+function showAuthStage(n){
+  document.querySelectorAll('.auth-stage').forEach(x=>x.classList.remove('active'));
+  document.getElementById('authStage'+n).classList.add('active');
+}
+function sendEmailCode(){
+  const email=(document.getElementById('authEmail').value||'').trim();
+  if(!email || !email.includes('@')){toast('Введите корректный email');return;}
+  if(!document.getElementById('consentProcessing').checked){toast('Нужно согласие на обработку данных');return;}
+  document.getElementById('authEmailPreview').textContent=email;
+  showAuthStage(2);
+}
+function verifyEmailCode(){showAuthStage(3)}
+function enterProduct(){
+  role=authRole;
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('productApp').classList.remove('auth-locked');
+  const top=document.getElementById('roleSelectTop'); if(top) top.value=role;
+  const legacy=document.getElementById('roleSelect'); if(legacy) legacy.value=role;
+  go(role==='candidate'?'candidate-resume':'employer-company');
+}
+function demoEnter(){
+  role=authRole;
+  document.getElementById('authScreen').classList.add('hidden');
+  document.getElementById('productApp').classList.remove('auth-locked');
+  const top=document.getElementById('roleSelectTop'); if(top) top.value=role;
+  const legacy=document.getElementById('roleSelect'); if(legacy) legacy.value=role;
+  go(role==='candidate'?'candidate-dashboard':'employer-dashboard');
+}
+function switchDemoRole(r){
+  role=r;
+  const legacy=document.getElementById('roleSelect'); if(legacy) legacy.value=r;
+  go(r==='candidate'?'candidate-dashboard':'employer-dashboard');
+}
+const menus={
+  candidate:[
+    ['Основное',[
+      ['candidate-dashboard','Обзор'],['candidate-resume','Резюме'],['candidate-test','Тестирование']
+    ]],
+    ['Взаимодействие',[
+      ['candidate-invitations','Приглашения','1'],['candidate-vacancies','Вакансии'],['candidate-applications','Мои отклики'],['candidate-settings','Настройки']
+    ]],
+  ],
+  employer:[
+    ['Основное',[
+      ['employer-dashboard','Обзор'],['employer-company','Компания'],['employer-need','Новая потребность'],['employer-search','Подбор талантов']
+    ]],
+    ['Взаимодействие',[
+      ['employer-invitations','Приглашения'],['employer-vacancies','Вакансии'],['employer-applications','Отклики']
+    ]],
+  ]
+};
+const titles={
+  'candidate-dashboard':'Обзор таланта','candidate-resume':'Резюме',
+  'candidate-test':'Тестирование','candidate-test-result':'Результат теста',
+  'candidate-invitations':'Приглашения','candidate-vacancies':'Вакансии','candidate-applications':'Мои отклики','candidate-vacancy-detail':'Вакансия','candidate-vacancy-detail':'Вакансия','candidate-settings':'Настройки',
+  'employer-dashboard':'Обзор работодателя','employer-company':'Профиль компании','employer-need':'Описание потребности',
+  'employer-search':'Подбор талантов','employer-candidate':'Карточка таланта','employer-invitations':'Приглашения',
+  'employer-vacancies':'Вакансии','employer-applications':'Отклики','demo-validation':'Валидация решения'
+};
+let role='candidate',current='candidate-dashboard',q=0,ranking='need',needStep=1,kafkaHard=false,fspBoost=false;
+let state={accepted:false,inviteSent:true,testDeferred:false,emailConfirmed:false,shortlist:new Set()};
+const candidates=[
+ {id:184,initials:'АС',role:'Backend · Middle',fit:94,strong:88,active:'сегодня',skills:['Python','PostgreSQL','FastAPI'],fsp:'2 призовых',notes:['✓ verified-категория Backend / Middle','✓ API / HTTP 90%','✓ PostgreSQL 82%','context: самостоятельная ответственность за сервис в резюме']},
+ {id:208,initials:'МП',role:'Backend · Senior',fit:90,strong:96,active:'вчера',skills:['Python','PostgreSQL','Redis'],fsp:'4 события',notes:['✓ Architecture 92%','✓ Senior подтверждён','− FastAPI только заявлен']},
+ {id:319,initials:'ДС',role:'Backend · Middle',fit:83,strong:81,active:'3 дня назад',skills:['Go','PostgreSQL','Docker'],fsp:'нет',notes:['✓ PostgreSQL подтверждён','✓ B2B опыт','− основной язык Go']},
+ {id:411,initials:'ИР',role:'Backend · Senior',fit:79,strong:91,active:'сегодня',skills:['Python','Kafka','Docker'],fsp:'финалист',notes:['✓ сильный подтверждённый профиль','✓ распределённые системы','− PostgreSQL 65%']}
+];
+const questions=[
+ {tag:'API / HTTP',text:'Клиент повторил POST-запрос после таймаута, а сервер успел создать сущность. Как лучше защититься от дублей?',answers:['Всегда повторять запрос','Использовать idempotency key и сохранять результат операции','Перевести endpoint на GET','Просто увеличить timeout'],correct:1},
+ {tag:'PostgreSQL',text:'Запрос по таблице orders стал медленным после роста до десятков миллионов строк. Что проверите первым?',answers:['Сразу добавлю Redis','EXPLAIN ANALYZE, селективность условий и индексы','Перепишу сервис на другой язык','Увеличу число API workers'],correct:1},
+ {tag:'Debugging',text:'После релиза p95 latency вырос в 4 раза, ошибок почти нет. Какой первый шаг наиболее рационален?',answers:['Откатить без анализа','Сопоставить метрики, трассировки и изменения релиза','Увеличить все таймауты','Отключить мониторинг'],correct:1},
+ {tag:'Architecture',text:'Сервис стал узким местом после роста нагрузки. Какой подход наиболее корректен?',answers:['Сначала локализовать bottleneck по данным, затем выбирать изменение','Сразу разбить систему на 20 микросервисов','Купить самый большой сервер','Убрать логирование'],correct:0}
+];
+
+function setResumeMode(mode){
+  const edit=document.getElementById('resumeEditMode'), preview=document.getElementById('resumePreviewMode');
+  const et=document.getElementById('resumeEditTab'), pt=document.getElementById('resumePreviewTab');
+  if(!edit||!preview)return;
+  edit.classList.toggle('active',mode==='edit');preview.classList.toggle('active',mode==='preview');
+  et.classList.toggle('active',mode==='edit');pt.classList.toggle('active',mode==='preview');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function openResumePreview(){go('candidate-resume');setTimeout(()=>setResumeMode('preview'),0)}
+function publishResume(){toast('Профиль опубликован');setResumeMode('preview')}
+function togglePreset(el){el.classList.toggle('on')}
+function clearNeedForm(){
+  ['needRole','needOutcome','needTasks'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const sf=document.getElementById('salaryFrom'),st=document.getElementById('salaryTo');if(sf)sf.value='';if(st)st.value='';
+  document.querySelectorAll('#employer-need .preset').forEach(x=>x.classList.remove('on'));
+  const sum=document.getElementById('needV12Summary');if(sum)sum.innerHTML='<div class="empty-soft">Форма очищена. Можно заполнить только обязательную зарплату и оставить остальное AI.</div>';
+  toast('Пример очищен');
+}
+function applyNeedPreset(kind){
+  const role=document.getElementById('needRole'),outcome=document.getElementById('needOutcome'),tasks=document.getElementById('needTasks');
+  if(kind==='scale'){role.value='Backend Developer';outcome.value='Взять ответственность за backend-сервис, стабилизировать API и помочь снизить нагрузку на PostgreSQL.';tasks.value='Рост нагрузки, деградация latency, оптимизация SQL без большого переписывания.';}
+  if(kind==='integration'){role.value='Backend Integration Developer';outcome.value='Ускорить подключение внешних партнёров и сделать интеграции наблюдаемыми и устойчивыми.';tasks.value='REST API, очереди, внешние контуры, повторная доставка и мониторинг.';}
+  if(kind==='platform'){role.value='Platform Backend Developer';outcome.value='Сократить ручные операции команды разработки через внутренние сервисы и автоматизацию.';tasks.value='Developer tools, automation, internal APIs, CI/CD integrations.';}
+  toast('Пресет применён');
+}
+function analyzeNeedV12(){
+  const sf=(document.getElementById('salaryFrom')?.value||'').trim(), st=(document.getElementById('salaryTo')?.value||'').trim();
+  if(!sf||!st){toast('Укажите зарплату от и до — это обязательное условие');return;}
+  const sum=document.getElementById('needV12Summary');
+  if(sum)sum.innerHTML='<div class="preview-item"><b>Backend Developer</b><span class="small muted">Backend · Middle+ / Senior</span></div><div class="preview-item"><b>Обязательно</b><span class="small muted">Python · PostgreSQL · production-опыт · самостоятельность</span></div><div class="preview-item"><b>Можно доучить</b><span class="small muted">Kafka · домен EdTech</span></div><div class="preview-item"><b>Условия</b><span class="small muted">'+sf+' — '+st+' · удалённо</span></div>';
+  toast('Потребность собрана');
+  setTimeout(()=>go('employer-search'),450);
+}
+
+function renderNav(){
+ const root=document.getElementById('navRoot');root.innerHTML='';
+ menus[role].forEach(([title,items])=>{
+   const g=document.createElement('div');g.className='nav-group';
+   g.innerHTML='<div class="nav-title">'+title+'</div>';
+   const nav=document.createElement('div');nav.className='nav';
+   items.forEach(([id,label,count])=>{
+      const b=document.createElement('button'); b.className=id===current?'active':'';
+      b.innerHTML='<span>'+label+'</span>'+(count?'<span class="count">'+count+'</span>':'');
+      b.onclick=()=>go(id);nav.appendChild(b);
+   });
+   g.appendChild(nav);root.appendChild(g);
+ });
+}
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ const el=document.getElementById(id);if(!el)return;
+ el.classList.add('active');current=id;document.getElementById('pageTitle').textContent=titles[id]||'ООП';
+ renderNav(); if(id==='candidate-dashboard')updateCandidateDashboard(); if(id==='employer-search')renderCandidates(); if(id==='employer-candidate')syncContacts();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+const legacyRoleSelect=document.getElementById('roleSelect');
+if(legacyRoleSelect) legacyRoleSelect.onchange=e=>{
+ role=e.target.value;
+ const top=document.getElementById('roleSelectTop'); if(top) top.value=role;
+ go(role==='candidate'?'candidate-dashboard':'employer-dashboard');
+};
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function saveCandidateDraft(){state.testDeferred=true;toast('Резюме сохранено. Тест можно пройти позже.');go('candidate-resume')}
+function deferTest(){state.testDeferred=true;toast('Попытка сохранена. К тесту можно вернуться из резюме.');go('candidate-resume')}
+function nextQuestion(){if(q<questions.length-1){q++;renderQuestion()}else{state.testDeferred=false;go('candidate-test-result')}}
+function prevQuestion(){if(q>0){q--;renderQuestion()}}
+function restartTest(){q=0;renderQuestion();go('candidate-test')}
+function setNeedStep(n){needStep=n;for(let i=1;i<=4;i++){const p=document.getElementById('needStep'+i),b=document.getElementById('needStepBtn'+i);if(p)p.classList.toggle('active',i===n);if(b){b.classList.toggle('active',i===n);b.classList.toggle('done',i<n);}}window.scrollTo({top:0,behavior:'smooth'});}
+function analyzeNeed(){
+ const el=document.getElementById('needStructured');el.style.opacity=1;
+ el.innerHTML=`<span class="badge ok">Структура готова · уверенность 87%</span>
+ <h3>Backend · Middle+ / Senior</h3>
+ <div class="summary-grid">
+  <div class="summary-item"><b>Контекст</b><span>Scale-up B2B SaaS, рост нагрузки, ownership одного сервиса.</span></div>
+  <div class="summary-item"><b>Обязательно</b><span>Python, PostgreSQL, API design, диагностика боевых проблем.</span></div>
+  <div class="summary-item"><b>Желательно</b><span>Performance, высокие нагрузки, system design, самостоятельность.</span></div>
+  <div class="summary-item"><b>Можно доучить</b><span>Kafka, внутренние сервисы, домен EdTech.</span></div>
+  <div class="summary-item"><b>Почему такой грейд</b><span>Нужен самостоятельный ownership и участие в архитектурных решениях.</span></div>
+  <div class="summary-item"><b>Условия</b><span>250–320 тыс. ₽ · remote · РФ ±3 часа МСК.</span></div>
+ </div>
+ <div class="divider"></div>
+ <div class="small"><b>Проверьте предположения:</b> опыт высоких нагрузок отмечен как желательный, а достижения ФСП — как дополнительный сигнал.</div>
+ <div class="small" style="margin-top:9px"><b>Можно изменить:</b> специализацию, грейд, обязательные требования и любые условия перед запуском поиска.</div>
+ <div class="actions"><button class="btn secondary sm" onclick="setNeedStep(1);toast('Можно изменить любой исходный ответ')">Изменить исходные ответы</button></div>`;
+ document.getElementById('needAfterAnalysis').style.display='flex';
+}
+function publishNeed(){toast('Потребность опубликована как вакансия')}
+function setRanking(mode){
+ ranking=mode;document.getElementById('rankNeed').classList.toggle('active',mode==='need');
+ document.getElementById('rankStrong').classList.toggle('active',mode==='strong');renderCandidates()
+}
+function renderCandidates(){
+ const root=document.getElementById('candidateList');if(!root)return;
+ const adjusted=[...candidates].map(c=>{
+   let fit=c.fit;
+   if(kafkaHard){ if(c.skills.includes('Kafka')) fit+=5; else fit-=7; }
+   if(fspBoost && c.fsp!=='нет') fit+=3;
+   return {...c,displayFit:Math.max(0,Math.min(99,fit))};
+ }).sort((a,b)=>(ranking==='need'?b.displayFit-a.displayFit:b.strong-a.strong));
+ const arr=adjusted;
+ root.innerHTML=arr.map(c=>`<div class="candidate">
+  <div>
+    <div class="candidate-top"><div class="mini-avatar">${c.initials}</div><div><b>Талант #${c.id}</b><div class="small muted">${c.role} · активен ${c.active}</div></div></div>
+    <div class="stack" style="margin-top:9px">${c.skills.map(x=>`<span class="badge ok">${x} ✓</span>`).join('')}<span class="badge gray">ФСП: ${c.fsp}</span></div>
+    <ul class="explain">${c.notes.map(n=>`<li>${n}</li>`).join('')}</ul>
+  </div>
+  <div><div class="match">${ranking==='need'?c.displayFit+'%':c.strong+'/100'}</div><div class="tiny muted">${ranking==='need'?'соответствие':'сила профиля'}</div><button class="btn sm" style="margin-top:13px" onclick="openCandidate(${c.id})">Открыть</button><button class="btn secondary sm" style="margin-top:7px" onclick="addShortlist(${c.id});event.stopPropagation()">+ шорт-лист</button></div>
+ </div>`).join('');
+}
+function toggleKafka(){
+ kafkaHard=!kafkaHard;
+ const b=document.getElementById('kafkaToggle');
+ if(b){b.classList.toggle('on',kafkaHard);b.textContent=kafkaHard?'Kafka: обязательно':'Kafka: можно доучить';}
+ renderCandidates();toast(kafkaHard?'Kafka стала обязательным требованием — выдача пересчитана':'Kafka снова считается обучаемой');
+}
+function toggleFspBoost(){
+ fspBoost=!fspBoost;
+ const b=document.getElementById('fspToggle');
+ if(b){b.classList.toggle('on',fspBoost);b.textContent=fspBoost?'ФСП: повышенный приоритет':'ФСП: бонус';}
+ renderCandidates();toast(fspBoost?'Усилен вес релевантных достижений ФСП':'Вес ФСП возвращён к обычному бонусу');
+}
+function addShortlist(id){state.shortlist.add(id);const el=document.getElementById('shortlistCount');if(el)el.textContent='Шорт-лист: '+state.shortlist.size;toast('Талант сохранён. Уточнение поиска его не потеряет.')}
+function openCandidate(id){
+ const c=candidates.find(x=>x.id===id)||candidates[0];
+ document.getElementById('detailAvatar').textContent=c.initials;document.getElementById('detailName').textContent='Талант #'+c.id;
+ document.getElementById('detailRole').textContent=c.role;document.getElementById('detailFit').textContent=c.fit+'%';go('employer-candidate');
+}
+function openInvite(){document.getElementById('inviteModal').classList.add('open')}
+function closeInvite(){document.getElementById('inviteModal').classList.remove('open')}
+function sendInvite(){state.inviteSent=true;closeInvite();toast('Приглашение отправлено');go('employer-invitations')}
+function acceptInvite(){
+ state.accepted=true;document.getElementById('candidateInviteCard').style.display='none';document.getElementById('acceptedBox').style.display='block';
+ document.getElementById('inviteStatus').className='badge ok';document.getElementById('inviteStatus').textContent='принято';syncContacts();toast('Контакты раскрыты работодателю');
+}
+function syncContacts(){
+ const l=document.getElementById('contactLocked'),r=document.getElementById('contactRevealed');if(!l||!r)return;
+ l.style.display=state.accepted?'none':'block';r.style.display=state.accepted?'block':'none';
+}
+function parseResumeIntoForm(){
+  toast('Резюме распознано и данные обновлены');
+}
+function openVacancy(id){
+  const map={
+    edutech:{title:'Backend Developer',company:'EduTech · B2B SaaS · Москва / удалённо',salary:'250–320 тыс. ₽'},
+    fintech:{title:'Python Backend Engineer',company:'FinCore · FinTech · Санкт-Петербург / удалённо',salary:'280–350 тыс. ₽'},
+    cloud:{title:'Platform Backend Developer',company:'CloudOps · Developer tools · удалённо',salary:'240–300 тыс. ₽'}
+  };
+  const v=map[id]||map.edutech;
+  const t=document.getElementById('vacancyDetailTitle'); if(t)t.textContent=v.title;
+  const c=document.getElementById('vacancyDetailCompany'); if(c)c.textContent=v.company;
+  const s=document.getElementById('vacancyDetailSalary'); if(s)s.textContent=v.salary;
+  go('candidate-vacancy-detail');
+}
+function applyDetailedVacancy(){
+  toast('Отклик отправлен работодателю');
+  setTimeout(()=>go('candidate-applications'),600);
+}
+function applyVacancy(btn){btn.textContent='Отклик отправлен';btn.disabled=true;btn.className='btn secondary';toast('Отклик отправлен')}
+function runValidation(){document.getElementById('metricP5').textContent='0.80';document.getElementById('metricExplain').textContent='100%';document.getElementById('metricGate').textContent='0';document.getElementById('metricConsistency').textContent='90%';document.getElementById('metricDelta').textContent='4.1';document.getElementById('metricDisc').textContent='0.72';toast('Показатели пересчитаны на контрольном наборе')}
+function openDemoGuide(){document.getElementById('demoModal').classList.add('open')}
+function closeDemoGuide(){document.getElementById('demoModal').classList.remove('open')}
+function resetDemo(){
+ role='candidate';current='candidate-dashboard';q=0;ranking='need';needStep=1;kafkaHard=false;fspBoost=false;
+ state={accepted:false,inviteSent:true,testDeferred:false,emailConfirmed:false,shortlist:new Set()};
+ const legacy=document.getElementById('roleSelect'); if(legacy) legacy.value='candidate';
+ const top=document.getElementById('roleSelectTop'); if(top) top.value='candidate';
+ const invite=document.getElementById('candidateInviteCard'); if(invite) invite.style.display='grid';
+ const accepted=document.getElementById('acceptedBox'); if(accepted) accepted.style.display='none';
+ const status=document.getElementById('inviteStatus'); if(status){status.className='badge warn';status.textContent='отправлено';}
+ const need=document.getElementById('needStructured'); if(need){
+   need.style.opacity=.55;
+   need.innerHTML='<b>Пока не проанализировано</b><p class="small muted">После анализа здесь появятся специализация, грейд, обязательные и желательные требования.</p>';
+ }
+ const after=document.getElementById('needAfterAnalysis'); if(after) after.style.display='none';
+ const sc=document.getElementById('shortlistCount'); if(sc) sc.textContent='Шорт-лист: 0';
+ renderQuestion();setRanking('need');setNeedStep(1);updateCandidateDashboard();
+ document.getElementById('productApp').classList.add('auth-locked');
+ document.getElementById('authScreen').classList.remove('hidden');
+ showAuthStage(1);selectAuthRole('candidate');
+ toast('Демонстрация сброшена');
+}
+/* Инициализация продолжения v13 находится в следующем script. */
+</script>
+<!-- V13_SCRIPT -->
+</body>
+</html>

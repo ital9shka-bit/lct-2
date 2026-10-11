@@ -1,0 +1,40 @@
+services:
+  keycloak-db:
+    image: ${APP_IMAGE:-oop-platform:local}
+    environment:
+      DATABASE_URL: postgres://oop:${POSTGRES_PASSWORD}@postgres:5432/oop
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?Set KEYCLOAK_DB_PASSWORD}
+    command: [node, deploy/keycloak-db.mjs]
+    depends_on:
+      postgres: {condition: service_healthy}
+      migrate: {condition: service_completed_successfully}
+    restart: 'no'
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.0@sha256:27b3230fbabb8c9ff3c66c864cf09dcd8a41aca82e5100679d109ef0eeb05741
+    command: [start, --import-realm]
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME:?Set KEYCLOAK_HOSTNAME}
+      KC_HTTP_ENABLED: 'true'
+      KC_HTTP_RELATIVE_PATH: /sso
+      KC_PROXY_HEADERS: xforwarded
+      KC_HEALTH_ENABLED: 'true'
+      KC_HTTP_MANAGEMENT_RELATIVE_PATH: /
+      KC_BOOTSTRAP_ADMIN_USERNAME: oop-admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Set KEYCLOAK_ADMIN_PASSWORD}
+      JAVA_OPTS_KC_HEAP: '-Xms64m -Xmx384m'
+    ports: ["127.0.0.1:${KEYCLOAK_PORT:-18901}:8080"]
+    volumes: [./deploy/.runtime/oop-demo-realm.json:/opt/keycloak/data/import/oop-demo-realm.json:ro]
+    mem_limit: 768m
+    depends_on:
+      keycloak-db: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, bash, -c, "exec 3<>/dev/tcp/127.0.0.1/9000; printf 'GET /health/ready HTTP/1.0\r\n\r\n' >&3; read -r status <&3; [[ \"$$status\" == *'200'* ]]"]
+      interval: 10s
+      timeout: 5s
+      start_period: 90s
+      retries: 20
+    restart: unless-stopped

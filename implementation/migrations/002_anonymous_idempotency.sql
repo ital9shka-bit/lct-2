@@ -1,0 +1,1 @@
+CREATE TABLE anonymous_idempotency(scope text NOT NULL, endpoint text NOT NULL, key uuid NOT NULL, body_hash text NOT NULL, status int NOT NULL, response jsonb NOT NULL, created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(scope,endpoint,key));

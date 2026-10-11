@@ -1,0 +1,2614 @@
+{
+  "schema_version": "1.0",
+  "bank_version": "backend-senior-0.3.0",
+  "scoring_version": "score-0.8.0",
+  "rubric_version": "backend-rubric-0.3.0",
+  "status": "authored_pending_independent_review",
+  "distribution": {
+    "grades": [
+      "Senior"
+    ],
+    "per_grade": {
+      "families": 30,
+      "items": 60,
+      "served_questions": 20,
+      "closed": 10,
+      "open": 10
+    }
+  },
+  "competencies": {
+    "http": "HTTP и API",
+    "sql": "Данные и SQL",
+    "debug": "Отладка и качество",
+    "arch": "Архитектура и надёжность",
+    "security": "Безопасность"
+  },
+  "families": [
+    {
+      "id": "Backend-Senior-B-http-1-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 1,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-http-1-fixed-1",
+        "Backend-Senior-B-http-1-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-http-2-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 2,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-http-2-fixed-1",
+        "Backend-Senior-B-http-2-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-sql-1-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-sql-1-fixed-1",
+        "Backend-Senior-B-sql-1-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-sql-2-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 2,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-sql-2-fixed-1",
+        "Backend-Senior-B-sql-2-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-debug-1-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-debug-1-fixed-1",
+        "Backend-Senior-B-debug-1-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-debug-2-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 2,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-debug-2-fixed-1",
+        "Backend-Senior-B-debug-2-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-arch-1-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-arch-1-fixed-1",
+        "Backend-Senior-B-arch-1-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-arch-2-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 2,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-arch-2-fixed-1",
+        "Backend-Senior-B-arch-2-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-security-1-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 1,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-security-1-fixed-1",
+        "Backend-Senior-B-security-1-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-B-security-2-fixed",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 2,
+      "branch": "fixed",
+      "items": [
+        "Backend-Senior-B-security-2-fixed-1",
+        "Backend-Senior-B-security-2-fixed-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-http-1-repair",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-A-http-1-repair-1",
+        "Backend-Senior-A-http-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-http-1-transfer",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-A-http-1-transfer-1",
+        "Backend-Senior-A-http-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-repair",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-A-sql-1-repair-1",
+        "Backend-Senior-A-sql-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-transfer",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-A-sql-1-transfer-1",
+        "Backend-Senior-A-sql-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-repair",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-A-debug-1-repair-1",
+        "Backend-Senior-A-debug-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-transfer",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-A-debug-1-transfer-1",
+        "Backend-Senior-A-debug-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-repair",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-A-arch-1-repair-1",
+        "Backend-Senior-A-arch-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-transfer",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-A-arch-1-transfer-1",
+        "Backend-Senior-A-arch-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-security-1-repair",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-A-security-1-repair-1",
+        "Backend-Senior-A-security-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-A-security-1-transfer",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-A-security-1-transfer-1",
+        "Backend-Senior-A-security-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-http-1-repair",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-V-http-1-repair-1",
+        "Backend-Senior-V-http-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-http-1-transfer",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-V-http-1-transfer-1",
+        "Backend-Senior-V-http-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-repair",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-V-sql-1-repair-1",
+        "Backend-Senior-V-sql-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-transfer",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-V-sql-1-transfer-1",
+        "Backend-Senior-V-sql-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-repair",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-V-debug-1-repair-1",
+        "Backend-Senior-V-debug-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-transfer",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-V-debug-1-transfer-1",
+        "Backend-Senior-V-debug-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-repair",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-V-arch-1-repair-1",
+        "Backend-Senior-V-arch-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-transfer",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-V-arch-1-transfer-1",
+        "Backend-Senior-V-arch-1-transfer-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-security-1-repair",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "items": [
+        "Backend-Senior-V-security-1-repair-1",
+        "Backend-Senior-V-security-1-repair-2"
+      ]
+    },
+    {
+      "id": "Backend-Senior-V-security-1-transfer",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "items": [
+        "Backend-Senior-V-security-1-transfer-1",
+        "Backend-Senior-V-security-1-transfer-2"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "Backend-Senior-B-http-1-fixed-1",
+      "family_id": "Backend-Senior-B-http-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. POST оплаты завершился таймаутом после возможного commit. Как безопасно повторить тот же бизнес-запрос?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Вернуть успех без проверки сохранённого результата"
+        },
+        {
+          "id": "B",
+          "text": "Повторить со стабильным Idempotency-Key и сверкой тела на сервере"
+        },
+        {
+          "id": "C",
+          "text": "Сгенерировать новый платёж на каждый сетевой повтор"
+        },
+        {
+          "id": "D",
+          "text": "Считать таймаут доказательством rollback"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Повторить со стабильным Idempotency-Key и сверкой тела на сервере"
+    },
+    {
+      "id": "Backend-Senior-B-http-1-fixed-2",
+      "family_id": "Backend-Senior-B-http-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. POST оплаты завершился таймаутом после возможного commit. Как безопасно повторить тот же бизнес-запрос?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Вернуть успех без проверки сохранённого результата"
+        },
+        {
+          "id": "B",
+          "text": "Повторить со стабильным Idempotency-Key и сверкой тела на сервере"
+        },
+        {
+          "id": "C",
+          "text": "Сгенерировать новый платёж на каждый сетевой повтор"
+        },
+        {
+          "id": "D",
+          "text": "Считать таймаут доказательством rollback"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Повторить со стабильным Idempotency-Key и сверкой тела на сервере"
+    },
+    {
+      "id": "Backend-Senior-B-http-2-fixed-1",
+      "family_id": "Backend-Senior-B-http-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Клиент повторяет оплату после таймаута; два сервера получают один ключ одновременно. Спроектируйте обработку без двойного списания. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Связывает ключ с владельцем, endpoint и нормализованным телом; Атомарно защищает конкурентное создание результата; Возвращает сохранённый результат эквивалентного повтора; Проверяет гонку, конфликт тела и сбой после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Связывает ключ с владельцем, endpoint и нормализованным телом"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Атомарно защищает конкурентное создание результата"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Возвращает сохранённый результат эквивалентного повтора"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет гонку, конфликт тела и сбой после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-http-2-fixed-2",
+      "family_id": "Backend-Senior-B-http-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "http",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Клиент повторяет оплату после таймаута; два сервера получают один ключ одновременно. Спроектируйте обработку без двойного списания. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Связывает ключ с владельцем, endpoint и нормализованным телом; Атомарно защищает конкурентное создание результата; Возвращает сохранённый результат эквивалентного повтора; Проверяет гонку, конфликт тела и сбой после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Связывает ключ с владельцем, endpoint и нормализованным телом"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Атомарно защищает конкурентное создание результата"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Возвращает сохранённый результат эквивалентного повтора"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет гонку, конфликт тела и сбой после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-sql-1-fixed-1",
+      "family_id": "Backend-Senior-B-sql-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Две транзакции снимают разных дежурных, каждая видит второго дежурным. Как защитить общий инвариант?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Использовать сериализуемую транзакцию с обработкой повторов либо явную блокировку общего инварианта"
+        },
+        {
+          "id": "B",
+          "text": "Оставить независимые записи без общей защиты"
+        },
+        {
+          "id": "C",
+          "text": "Проверять инвариант только до начала транзакции"
+        },
+        {
+          "id": "D",
+          "text": "Исправить только название столбца"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Использовать сериализуемую транзакцию с обработкой повторов либо явную блокировку общего инварианта"
+    },
+    {
+      "id": "Backend-Senior-B-sql-1-fixed-2",
+      "family_id": "Backend-Senior-B-sql-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Две транзакции снимают разных дежурных, каждая видит второго дежурным. Как защитить общий инвариант?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Проверять инвариант только до начала транзакции"
+        },
+        {
+          "id": "B",
+          "text": "Исправить только название столбца"
+        },
+        {
+          "id": "C",
+          "text": "Использовать сериализуемую транзакцию с обработкой повторов либо явную блокировку общего инварианта"
+        },
+        {
+          "id": "D",
+          "text": "Оставить независимые записи без общей защиты"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Использовать сериализуемую транзакцию с обработкой повторов либо явную блокировку общего инварианта"
+    },
+    {
+      "id": "Backend-Senior-B-sql-2-fixed-1",
+      "family_id": "Backend-Senior-B-sql-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Каждая из двух транзакций проверяет, что другой дежурный остаётся активным, и снимает своего. Разберите инвариант и исправление.",
+      "format": "open",
+      "reference_answer": "Объясняет write skew общего инварианта; Защищает общий инвариант сериализуемостью или блокировкой; Обрабатывает конфликт и повтор всей транзакции; Проверяет управляемую конкурентную последовательность.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объясняет write skew общего инварианта"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Защищает общий инвариант сериализуемостью или блокировкой"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Обрабатывает конфликт и повтор всей транзакции"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет управляемую конкурентную последовательность"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-sql-2-fixed-2",
+      "family_id": "Backend-Senior-B-sql-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "sql",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Каждая из двух транзакций проверяет, что другой дежурный остаётся активным, и снимает своего. Разберите инвариант и исправление.",
+      "format": "open",
+      "reference_answer": "Объясняет write skew общего инварианта; Защищает общий инвариант сериализуемостью или блокировкой; Обрабатывает конфликт и повтор всей транзакции; Проверяет управляемую конкурентную последовательность.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объясняет write skew общего инварианта"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Защищает общий инвариант сериализуемостью или блокировкой"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Обрабатывает конфликт и повтор всей транзакции"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет управляемую конкурентную последовательность"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-debug-1-fixed-1",
+      "family_id": "Backend-Senior-B-debug-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. p95 API вырос, но среднее почти не изменилось. Какое наблюдение наиболее полезно для локализации?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Удаление всех timeout"
+        },
+        {
+          "id": "B",
+          "text": "Распределение задержек и trace медленных запросов по зависимостям"
+        },
+        {
+          "id": "C",
+          "text": "Только среднее число символов имени пользователя"
+        },
+        {
+          "id": "D",
+          "text": "Цвет главной страницы"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Распределение задержек и trace медленных запросов по зависимостям"
+    },
+    {
+      "id": "Backend-Senior-B-debug-1-fixed-2",
+      "family_id": "Backend-Senior-B-debug-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. p95 API вырос, но среднее почти не изменилось. Какое наблюдение наиболее полезно для локализации?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Цвет главной страницы"
+        },
+        {
+          "id": "B",
+          "text": "Удаление всех timeout"
+        },
+        {
+          "id": "C",
+          "text": "Распределение задержек и trace медленных запросов по зависимостям"
+        },
+        {
+          "id": "D",
+          "text": "Только среднее число символов имени пользователя"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Распределение задержек и trace медленных запросов по зависимостям"
+    },
+    {
+      "id": "Backend-Senior-B-debug-2-fixed-1",
+      "family_id": "Backend-Senior-B-debug-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. После релиза p95 вырос, среднее стабильно. Опишите диагностику по traces, SQL и состоянию пула. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Разделяет сценарии и распределения задержек; Коррелирует trace с медленными SQL и ожиданием пула; Не записывает приватные ответы в общие логи; Подтверждает исправление сопоставимым измерением.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Разделяет сценарии и распределения задержек"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Коррелирует trace с медленными SQL и ожиданием пула"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Не записывает приватные ответы в общие логи"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Подтверждает исправление сопоставимым измерением"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-debug-2-fixed-2",
+      "family_id": "Backend-Senior-B-debug-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "debug",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. После релиза p95 вырос, среднее стабильно. Опишите диагностику по traces, SQL и состоянию пула. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Разделяет сценарии и распределения задержек; Коррелирует trace с медленными SQL и ожиданием пула; Не записывает приватные ответы в общие логи; Подтверждает исправление сопоставимым измерением.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Разделяет сценарии и распределения задержек"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Коррелирует trace с медленными SQL и ожиданием пула"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Не записывает приватные ответы в общие логи"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Подтверждает исправление сопоставимым измерением"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-arch-1-fixed-1",
+      "family_id": "Backend-Senior-B-arch-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Очередь растёт быстрее, чем downstream обрабатывает задачи. Что ограничивает каскадный отказ?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Бесконечный retry без задержки"
+        },
+        {
+          "id": "B",
+          "text": "Удаление всех метрик очереди"
+        },
+        {
+          "id": "C",
+          "text": "Ограничение параллелизма, backpressure и явная политика перегрузки"
+        },
+        {
+          "id": "D",
+          "text": "Неограниченный запуск новых запросов"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Ограничение параллелизма, backpressure и явная политика перегрузки"
+    },
+    {
+      "id": "Backend-Senior-B-arch-1-fixed-2",
+      "family_id": "Backend-Senior-B-arch-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Очередь растёт быстрее, чем downstream обрабатывает задачи. Что ограничивает каскадный отказ?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Бесконечный retry без задержки"
+        },
+        {
+          "id": "B",
+          "text": "Удаление всех метрик очереди"
+        },
+        {
+          "id": "C",
+          "text": "Ограничение параллелизма, backpressure и явная политика перегрузки"
+        },
+        {
+          "id": "D",
+          "text": "Неограниченный запуск новых запросов"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Ограничение параллелизма, backpressure и явная политика перегрузки"
+    },
+    {
+      "id": "Backend-Senior-B-arch-2-fixed-1",
+      "family_id": "Backend-Senior-B-arch-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Нужно доставлять уведомления после принятия приглашения без потери события. Спроектируйте транзакцию и обработку дублей. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Атомарно сохраняет принятие, разрешение и outbox; Обрабатывает задачи через lease; Задаёт дедупликацию и стабильный event ID; Проверяет crash в каждой значимой границе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Атомарно сохраняет принятие, разрешение и outbox"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Обрабатывает задачи через lease"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Задаёт дедупликацию и стабильный event ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет crash в каждой значимой границе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-arch-2-fixed-2",
+      "family_id": "Backend-Senior-B-arch-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "arch",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Нужно доставлять уведомления после принятия приглашения без потери события. Спроектируйте транзакцию и обработку дублей. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Атомарно сохраняет принятие, разрешение и outbox; Обрабатывает задачи через lease; Задаёт дедупликацию и стабильный event ID; Проверяет crash в каждой значимой границе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Атомарно сохраняет принятие, разрешение и outbox"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Обрабатывает задачи через lease"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Задаёт дедупликацию и стабильный event ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет crash в каждой значимой границе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-B-security-1-fixed-1",
+      "family_id": "Backend-Senior-B-security-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Запрос содержит tenant_id чужой организации. Как определяется разрешённая область данных?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Из проверенной сессии и серверных прав, со сверкой объекта"
+        },
+        {
+          "id": "B",
+          "text": "Только из переданного tenant_id"
+        },
+        {
+          "id": "C",
+          "text": "Из цвета темы интерфейса"
+        },
+        {
+          "id": "D",
+          "text": "Из имени файла приложения"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Из проверенной сессии и серверных прав, со сверкой объекта"
+    },
+    {
+      "id": "Backend-Senior-B-security-1-fixed-2",
+      "family_id": "Backend-Senior-B-security-1-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 1,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Запрос содержит tenant_id чужой организации. Как определяется разрешённая область данных?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Из имени файла приложения"
+        },
+        {
+          "id": "B",
+          "text": "Из проверенной сессии и серверных прав, со сверкой объекта"
+        },
+        {
+          "id": "C",
+          "text": "Только из переданного tenant_id"
+        },
+        {
+          "id": "D",
+          "text": "Из цвета темы интерфейса"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Из проверенной сессии и серверных прав, со сверкой объекта"
+    },
+    {
+      "id": "Backend-Senior-B-security-2-fixed-1",
+      "family_id": "Backend-Senior-B-security-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Пользователю отозвали членство в компании. Что должно произойти со следующим запросом к её приватным данным?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Старый экран навсегда сохраняет право доступа"
+        },
+        {
+          "id": "B",
+          "text": "Достаточно скрыть кнопку на одном устройстве"
+        },
+        {
+          "id": "C",
+          "text": "Проверка нужна только при регистрации"
+        },
+        {
+          "id": "D",
+          "text": "Сервер отклоняет запрос по актуальному членству"
+        }
+      ],
+      "answer_key": "D",
+      "rationale": "Сервер отклоняет запрос по актуальному членству"
+    },
+    {
+      "id": "Backend-Senior-B-security-2-fixed-2",
+      "family_id": "Backend-Senior-B-security-2-fixed",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "B",
+      "competency": "security",
+      "slot": 2,
+      "branch": "fixed",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Пользователю отозвали членство в компании. Что должно произойти со следующим запросом к её приватным данным?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Сервер отклоняет запрос по актуальному членству"
+        },
+        {
+          "id": "B",
+          "text": "Старый экран навсегда сохраняет право доступа"
+        },
+        {
+          "id": "C",
+          "text": "Достаточно скрыть кнопку на одном устройстве"
+        },
+        {
+          "id": "D",
+          "text": "Проверка нужна только при регистрации"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Сервер отклоняет запрос по актуальному членству"
+    },
+    {
+      "id": "Backend-Senior-A-http-1-repair-1",
+      "family_id": "Backend-Senior-A-http-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Заказ сохранён, а outbox записывают следующим запросом. Между запросами процесс падает. Предложите атомарное сохранение, работу worker, обработку дублей и crash-тест.",
+      "format": "open",
+      "reference_answer": "Сохраняет заказ и outbox в одной транзакции; Worker читает только committed события и использует lease; Получатель дедуплицирует стабильный event ID; Проверяет crash между отправкой и отметкой.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Сохраняет заказ и outbox в одной транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Worker читает только committed события и использует lease"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Получатель дедуплицирует стабильный event ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет crash между отправкой и отметкой"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-http-1-repair-2",
+      "family_id": "Backend-Senior-A-http-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Заказ сохранён, а outbox записывают следующим запросом. Между запросами процесс падает. Предложите атомарное сохранение, работу worker, обработку дублей и crash-тест.",
+      "format": "open",
+      "reference_answer": "Сохраняет заказ и outbox в одной транзакции; Worker читает только committed события и использует lease; Получатель дедуплицирует стабильный event ID; Проверяет crash между отправкой и отметкой.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Сохраняет заказ и outbox в одной транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Worker читает только committed события и использует lease"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Получатель дедуплицирует стабильный event ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет crash между отправкой и отметкой"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-http-1-transfer-1",
+      "family_id": "Backend-Senior-A-http-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. API меняет статус заказа и публикует событие. Сеть до брокера может отказать после commit. Спроектируйте доставку. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Записывает outbox вместе с изменением заказа; Организует lease и ограниченные повторы; Учитывает дубль доставки у получателя; Проверяет сбой между отправкой и отметкой доставки.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Записывает outbox вместе с изменением заказа"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Организует lease и ограниченные повторы"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Учитывает дубль доставки у получателя"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет сбой между отправкой и отметкой доставки"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-http-1-transfer-2",
+      "family_id": "Backend-Senior-A-http-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. API меняет статус заказа и публикует событие. Сеть до брокера может отказать после commit. Спроектируйте доставку. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Записывает outbox вместе с изменением заказа; Организует lease и ограниченные повторы; Учитывает дубль доставки у получателя; Проверяет сбой между отправкой и отметкой доставки.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Записывает outbox вместе с изменением заказа"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Организует lease и ограниченные повторы"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Учитывает дубль доставки у получателя"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет сбой между отправкой и отметкой доставки"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-repair-1",
+      "family_id": "Backend-Senior-A-sql-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Outbox создаётся до заказа в отдельной транзакции: worker видит событие для отсутствующего заказа. Предложите границу транзакции, правило доставки, дедупликацию и проверки rollback/restart.",
+      "format": "open",
+      "reference_answer": "Объединяет заказ и событие в одной транзакции; Доставка начинается после commit; Consumer идемпотентен по стабильному ID; Проверяет rollback и рестарт после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объединяет заказ и событие в одной транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Доставка начинается после commit"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Consumer идемпотентен по стабильному ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет rollback и рестарт после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-repair-2",
+      "family_id": "Backend-Senior-A-sql-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Outbox создаётся до заказа в отдельной транзакции: worker видит событие для отсутствующего заказа. Предложите границу транзакции, правило доставки, дедупликацию и проверки rollback/restart.",
+      "format": "open",
+      "reference_answer": "Объединяет заказ и событие в одной транзакции; Доставка начинается после commit; Consumer идемпотентен по стабильному ID; Проверяет rollback и рестарт после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объединяет заказ и событие в одной транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Доставка начинается после commit"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Consumer идемпотентен по стабильному ID"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет rollback и рестарт после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-transfer-1",
+      "family_id": "Backend-Senior-A-sql-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Запись заказа и outbox создаются отдельно. Worker иногда получает событие для отсутствующего заказа. Исправьте границу транзакции. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Объединяет заказ и событие в транзакции; Не допускает внешнюю доставку до commit; Задаёт идемпотентный consumer; Проверяет rollback и рестарт после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объединяет заказ и событие в транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Не допускает внешнюю доставку до commit"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Задаёт идемпотентный consumer"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет rollback и рестарт после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-sql-1-transfer-2",
+      "family_id": "Backend-Senior-A-sql-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Запись заказа и outbox создаются отдельно. Worker иногда получает событие для отсутствующего заказа. Исправьте границу транзакции. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Объединяет заказ и событие в транзакции; Не допускает внешнюю доставку до commit; Задаёт идемпотентный consumer; Проверяет rollback и рестарт после commit.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Объединяет заказ и событие в транзакции"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Не допускает внешнюю доставку до commit"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Задаёт идемпотентный consumer"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет rollback и рестарт после commit"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-repair-1",
+      "family_id": "Backend-Senior-A-debug-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. После crash worker задача снова выполняется, но внешний эффект может уже произойти. Какой тест проверяет эту границу?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Только рестарт на пустой очереди"
+        },
+        {
+          "id": "B",
+          "text": "Последовательная обработка разных задач без сбоев"
+        },
+        {
+          "id": "C",
+          "text": "Crash после эффекта до отметки и повтор с прежним event ID"
+        },
+        {
+          "id": "D",
+          "text": "Только crash до чтения задачи"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Crash после эффекта до отметки и повтор с прежним event ID"
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-repair-2",
+      "family_id": "Backend-Senior-A-debug-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. После crash worker задача снова выполняется, но внешний эффект может уже произойти. Какой тест проверяет эту границу?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Последовательная обработка разных задач без сбоев"
+        },
+        {
+          "id": "B",
+          "text": "Crash после эффекта до отметки и повтор с прежним event ID"
+        },
+        {
+          "id": "C",
+          "text": "Только crash до чтения задачи"
+        },
+        {
+          "id": "D",
+          "text": "Только рестарт на пустой очереди"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Crash после эффекта до отметки и повтор с прежним event ID"
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-transfer-1",
+      "family_id": "Backend-Senior-A-debug-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Worker умер после отправки события до отметки доставки. Какой сценарий нужно проверить?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Успешное обновление CSS"
+        },
+        {
+          "id": "B",
+          "text": "Повторную доставку и идемпотентную обработку получателем"
+        },
+        {
+          "id": "C",
+          "text": "Только старт worker на пустой базе"
+        },
+        {
+          "id": "D",
+          "text": "Отсутствие повторов по имени контейнера"
+        }
+      ],
+      "answer_key": "B",
+      "rationale": "Повторную доставку и идемпотентную обработку получателем"
+    },
+    {
+      "id": "Backend-Senior-A-debug-1-transfer-2",
+      "family_id": "Backend-Senior-A-debug-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Worker умер после отправки события до отметки доставки. Какой сценарий нужно проверить?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Отсутствие повторов по имени контейнера"
+        },
+        {
+          "id": "B",
+          "text": "Успешное обновление CSS"
+        },
+        {
+          "id": "C",
+          "text": "Повторную доставку и идемпотентную обработку получателем"
+        },
+        {
+          "id": "D",
+          "text": "Только старт worker на пустой базе"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Повторную доставку и идемпотентную обработку получателем"
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-repair-1",
+      "family_id": "Backend-Senior-A-arch-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. При отказе внешнего сервиса worker делает немедленные бесконечные повторы, очередь растёт. Опишите параллелизм, retry, политику перегрузки и наблюдение за восстановлением. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Ограничивает параллелизм; Задаёт ограниченные повторы с задержкой и terminal failure; Определяет политику роста очереди; Измеряет возраст задач и проверяет отказ зависимости.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Ограничивает параллелизм"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Задаёт ограниченные повторы с задержкой и terminal failure"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет политику роста очереди"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Измеряет возраст задач и проверяет отказ зависимости"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-repair-2",
+      "family_id": "Backend-Senior-A-arch-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. При отказе внешнего сервиса worker делает немедленные бесконечные повторы, очередь растёт. Опишите параллелизм, retry, политику перегрузки и наблюдение за восстановлением. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Ограничивает параллелизм; Задаёт ограниченные повторы с задержкой и terminal failure; Определяет политику роста очереди; Измеряет возраст задач и проверяет отказ зависимости.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Ограничивает параллелизм"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Задаёт ограниченные повторы с задержкой и terminal failure"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет политику роста очереди"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Измеряет возраст задач и проверяет отказ зависимости"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-transfer-1",
+      "family_id": "Backend-Senior-A-arch-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Поток задач превышает мощность внешнего сервиса. Спроектируйте backpressure, retry и наблюдаемость. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Ограничивает одновременные вызовы; Задаёт bounded retry с задержкой и terminal failure; Определяет политику при росте очереди; Измеряет возраст задач и проверяет отказ зависимости.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Ограничивает одновременные вызовы"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Задаёт bounded retry с задержкой и terminal failure"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет политику при росте очереди"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Измеряет возраст задач и проверяет отказ зависимости"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-arch-1-transfer-2",
+      "family_id": "Backend-Senior-A-arch-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Поток задач превышает мощность внешнего сервиса. Спроектируйте backpressure, retry и наблюдаемость. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Ограничивает одновременные вызовы; Задаёт bounded retry с задержкой и terminal failure; Определяет политику при росте очереди; Измеряет возраст задач и проверяет отказ зависимости.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Ограничивает одновременные вызовы"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Задаёт bounded retry с задержкой и terminal failure"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет политику при росте очереди"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Измеряет возраст задач и проверяет отказ зависимости"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-A-security-1-repair-1",
+      "family_id": "Backend-Senior-A-security-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Право на объект проверяют по company_id из тела запроса. Пользователь подставляет другую компанию. Как защитить область доступа?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Брать компанию из проверенной сессии, сверять актуальное членство и объект"
+        },
+        {
+          "id": "B",
+          "text": "Только проверять формат company_id"
+        },
+        {
+          "id": "C",
+          "text": "Сравнивать company_id с текстом заголовка страницы"
+        },
+        {
+          "id": "D",
+          "text": "Разрешать любой company_id аутентифицированному пользователю"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Брать компанию из проверенной сессии, сверять актуальное членство и объект"
+    },
+    {
+      "id": "Backend-Senior-A-security-1-repair-2",
+      "family_id": "Backend-Senior-A-security-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Право на объект проверяют по company_id из тела запроса. Пользователь подставляет другую компанию. Как защитить область доступа?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Брать компанию из проверенной сессии, сверять актуальное членство и объект"
+        },
+        {
+          "id": "B",
+          "text": "Только проверять формат company_id"
+        },
+        {
+          "id": "C",
+          "text": "Сравнивать company_id с текстом заголовка страницы"
+        },
+        {
+          "id": "D",
+          "text": "Разрешать любой company_id аутентифицированному пользователю"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Брать компанию из проверенной сессии, сверять актуальное членство и объект"
+    },
+    {
+      "id": "Backend-Senior-A-security-1-transfer-1",
+      "family_id": "Backend-Senior-A-security-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Авторизация для неизвестного действия не настроена. Какое поведение соответствует deny-by-default?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Разрешить при длинном UUID"
+        },
+        {
+          "id": "B",
+          "text": "Разрешить запрос без CSRF"
+        },
+        {
+          "id": "C",
+          "text": "Отказать, пока разрешение не задано явно"
+        },
+        {
+          "id": "D",
+          "text": "Разрешить всем аутентифицированным пользователям"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Отказать, пока разрешение не задано явно"
+    },
+    {
+      "id": "Backend-Senior-A-security-1-transfer-2",
+      "family_id": "Backend-Senior-A-security-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "A",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Авторизация для неизвестного действия не настроена. Какое поведение соответствует deny-by-default?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Разрешить при длинном UUID"
+        },
+        {
+          "id": "B",
+          "text": "Разрешить запрос без CSRF"
+        },
+        {
+          "id": "C",
+          "text": "Отказать, пока разрешение не задано явно"
+        },
+        {
+          "id": "D",
+          "text": "Разрешить всем аутентифицированным пользователям"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Отказать, пока разрешение не задано явно"
+    },
+    {
+      "id": "Backend-Senior-V-http-1-repair-1",
+      "family_id": "Backend-Senior-V-http-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Старый клиент ещё месяц отправляет поле address, новый использует delivery_address. Релиз удалил address и сломал старого клиента. Спроектируйте переход, включение, удаление старого поля и rollback-тест.",
+      "format": "open",
+      "reference_answer": "Задаёт совместимый переходный контракт; Разделяет развёртывание и включение; Определяет срок и критерии удаления старого поля; Проверяет старого клиента и откат.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Задаёт совместимый переходный контракт"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Разделяет развёртывание и включение"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет срок и критерии удаления старого поля"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет старого клиента и откат"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-http-1-repair-2",
+      "family_id": "Backend-Senior-V-http-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Старый клиент ещё месяц отправляет поле address, новый использует delivery_address. Релиз удалил address и сломал старого клиента. Спроектируйте переход, включение, удаление старого поля и rollback-тест.",
+      "format": "open",
+      "reference_answer": "Задаёт совместимый переходный контракт; Разделяет развёртывание и включение; Определяет срок и критерии удаления старого поля; Проверяет старого клиента и откат.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Задаёт совместимый переходный контракт"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Разделяет развёртывание и включение"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет срок и критерии удаления старого поля"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет старого клиента и откат"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-http-1-transfer-1",
+      "family_id": "Backend-Senior-V-http-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Новый API меняет обязательное поле, а часть клиентов обновится через месяц. Предложите переход и откат. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Задаёт совместимый переходный контракт; Разделяет развёртывание и включение нового поведения; Определяет срок и критерий удаления старого поля; Проверяет старый клиент и rollback.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Задаёт совместимый переходный контракт"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Разделяет развёртывание и включение нового поведения"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет срок и критерий удаления старого поля"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет старый клиент и rollback"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-http-1-transfer-2",
+      "family_id": "Backend-Senior-V-http-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "http",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Новый API меняет обязательное поле, а часть клиентов обновится через месяц. Предложите переход и откат. Опишите решение и проверки его поведения.",
+      "format": "open",
+      "reference_answer": "Задаёт совместимый переходный контракт; Разделяет развёртывание и включение нового поведения; Определяет срок и критерий удаления старого поля; Проверяет старый клиент и rollback.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Задаёт совместимый переходный контракт"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Разделяет развёртывание и включение нового поведения"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Определяет срок и критерий удаления старого поля"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет старый клиент и rollback"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-repair-1",
+      "family_id": "Backend-Senior-V-sql-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Два редактора сохранили revision=12. Второе UPDATE вернуло 0 строк, но API ответил успехом. Исправьте атомарную запись, ответ конфликта и путь разрешения; опишите конкурентный тест.",
+      "format": "open",
+      "reference_answer": "Обновляет условно по текущей revision; Возвращает конфликт без перезаписи; Позволяет получить и сравнить актуальную версию; Проверяет один успех и один конфликт.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Обновляет условно по текущей revision"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Возвращает конфликт без перезаписи"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Позволяет получить и сравнить актуальную версию"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет один успех и один конфликт"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-repair-2",
+      "family_id": "Backend-Senior-V-sql-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Два редактора сохранили revision=12. Второе UPDATE вернуло 0 строк, но API ответил успехом. Исправьте атомарную запись, ответ конфликта и путь разрешения; опишите конкурентный тест.",
+      "format": "open",
+      "reference_answer": "Обновляет условно по текущей revision; Возвращает конфликт без перезаписи; Позволяет получить и сравнить актуальную версию; Проверяет один успех и один конфликт.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Обновляет условно по текущей revision"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Возвращает конфликт без перезаписи"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Позволяет получить и сравнить актуальную версию"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет один успех и один конфликт"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-transfer-1",
+      "family_id": "Backend-Senior-V-sql-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Две вкладки изменяют профиль с одной revision. Одна запись обновляет ноль строк. Спроектируйте контракт и проверку.",
+      "format": "open",
+      "reference_answer": "Условно обновляет запись по текущей revision; Возвращает конфликт без потери данных; Позволяет получить и сравнить актуальную версию; Проверяет один успех и один конфликт при гонке.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Условно обновляет запись по текущей revision"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Возвращает конфликт без потери данных"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Позволяет получить и сравнить актуальную версию"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет один успех и один конфликт при гонке"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-sql-1-transfer-2",
+      "family_id": "Backend-Senior-V-sql-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "sql",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Две вкладки изменяют профиль с одной revision. Одна запись обновляет ноль строк. Спроектируйте контракт и проверку.",
+      "format": "open",
+      "reference_answer": "Условно обновляет запись по текущей revision; Возвращает конфликт без потери данных; Позволяет получить и сравнить актуальную версию; Проверяет один успех и один конфликт при гонке.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Условно обновляет запись по текущей revision"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Возвращает конфликт без потери данных"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Позволяет получить и сравнить актуальную версию"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет один успех и один конфликт при гонке"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-repair-1",
+      "family_id": "Backend-Senior-V-debug-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Последовательный тест не воспроизводит одновременное списание последнего остатка. Что нужно изменить?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Управляемо совместить операции барьером и проверить число эффектов и инвариант БД"
+        },
+        {
+          "id": "B",
+          "text": "Добавить фиксированную паузу между последовательными запросами"
+        },
+        {
+          "id": "C",
+          "text": "Повторить один запрос 100 раз"
+        },
+        {
+          "id": "D",
+          "text": "Проверить только HTTP-статус одного запроса"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Управляемо совместить операции барьером и проверить число эффектов и инвариант БД"
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-repair-2",
+      "family_id": "Backend-Senior-V-debug-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Последовательный тест не воспроизводит одновременное списание последнего остатка. Что нужно изменить?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Повторить один запрос 100 раз"
+        },
+        {
+          "id": "B",
+          "text": "Проверить только HTTP-статус одного запроса"
+        },
+        {
+          "id": "C",
+          "text": "Управляемо совместить операции барьером и проверить число эффектов и инвариант БД"
+        },
+        {
+          "id": "D",
+          "text": "Добавить фиксированную паузу между последовательными запросами"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Управляемо совместить операции барьером и проверить число эффектов и инвариант БД"
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-transfer-1",
+      "family_id": "Backend-Senior-V-debug-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Ошибка возникает при конкретном порядке двух запросов. Как подтвердить исправление гонки?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Добавить фиксированную паузу без блокировки"
+        },
+        {
+          "id": "B",
+          "text": "Проверить один последовательный запрос"
+        },
+        {
+          "id": "C",
+          "text": "Управляемо воспроизвести порядок и проверить инвариант состояния"
+        },
+        {
+          "id": "D",
+          "text": "Перезапускать случайный тест до успеха"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Управляемо воспроизвести порядок и проверить инвариант состояния"
+    },
+    {
+      "id": "Backend-Senior-V-debug-1-transfer-2",
+      "family_id": "Backend-Senior-V-debug-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "debug",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Ошибка возникает при конкретном порядке двух запросов. Как подтвердить исправление гонки?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Управляемо воспроизвести порядок и проверить инвариант состояния"
+        },
+        {
+          "id": "B",
+          "text": "Перезапускать случайный тест до успеха"
+        },
+        {
+          "id": "C",
+          "text": "Добавить фиксированную паузу без блокировки"
+        },
+        {
+          "id": "D",
+          "text": "Проверить один последовательный запрос"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Управляемо воспроизвести порядок и проверить инвариант состояния"
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-repair-1",
+      "family_id": "Backend-Senior-V-arch-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Удаление старого столбца выполнено до обновления последнего старого сервиса. Какой переход предотвращает этот сбой?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Удаление поля после первого успешного запроса нового сервиса"
+        },
+        {
+          "id": "B",
+          "text": "Одновременное переименование столбца во всех миграциях без поддержки старой версии"
+        },
+        {
+          "id": "C",
+          "text": "Expand, переход читателей и записи, проверка переноса, затем contract"
+        },
+        {
+          "id": "D",
+          "text": "Contract до развёртывания читателей"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Expand, переход читателей и записи, проверка переноса, затем contract"
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-repair-2",
+      "family_id": "Backend-Senior-V-arch-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Удаление старого столбца выполнено до обновления последнего старого сервиса. Какой переход предотвращает этот сбой?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Contract до развёртывания читателей"
+        },
+        {
+          "id": "B",
+          "text": "Удаление поля после первого успешного запроса нового сервиса"
+        },
+        {
+          "id": "C",
+          "text": "Одновременное переименование столбца во всех миграциях без поддержки старой версии"
+        },
+        {
+          "id": "D",
+          "text": "Expand, переход читателей и записи, проверка переноса, затем contract"
+        }
+      ],
+      "answer_key": "D",
+      "rationale": "Expand, переход читателей и записи, проверка переноса, затем contract"
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-transfer-1",
+      "family_id": "Backend-Senior-V-arch-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов.. Новая миграция должна работать со старой и новой версиями сервиса. Какой порядок снижает риск?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Расширить схему, перевести чтение/запись, затем удалить старое после перехода"
+        },
+        {
+          "id": "B",
+          "text": "Удалить старые поля до обновления читателей"
+        },
+        {
+          "id": "C",
+          "text": "Изменить все данные без backup и проверки"
+        },
+        {
+          "id": "D",
+          "text": "Считать отсутствие SQL-ошибки полной проверкой"
+        }
+      ],
+      "answer_key": "A",
+      "rationale": "Расширить схему, перевести чтение/запись, затем удалить старое после перехода"
+    },
+    {
+      "id": "Backend-Senior-V-arch-1-transfer-2",
+      "family_id": "Backend-Senior-V-arch-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "arch",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды.. Новая миграция должна работать со старой и новой версиями сервиса. Какой порядок снижает риск?",
+      "format": "closed",
+      "options": [
+        {
+          "id": "A",
+          "text": "Изменить все данные без backup и проверки"
+        },
+        {
+          "id": "B",
+          "text": "Считать отсутствие SQL-ошибки полной проверкой"
+        },
+        {
+          "id": "C",
+          "text": "Расширить схему, перевести чтение/запись, затем удалить старое после перехода"
+        },
+        {
+          "id": "D",
+          "text": "Удалить старые поля до обновления читателей"
+        }
+      ],
+      "answer_key": "C",
+      "rationale": "Расширить схему, перевести чтение/запись, затем удалить старое после перехода"
+    },
+    {
+      "id": "Backend-Senior-V-security-1-repair-1",
+      "family_id": "Backend-Senior-V-security-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. Error-handler пишет в общий лог email, session token и текст ответа. Предложите allowlist диагностики, приватный audit и проверки реальных записей.",
+      "format": "open",
+      "reference_answer": "Использует allowlist метаданных; Исключает приватные тексты, контакты и токены; Разделяет защищённый audit и общий лог; Проверяет записи при успешном и ошибочном запросе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Использует allowlist метаданных"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Исключает приватные тексты, контакты и токены"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Разделяет защищённый audit и общий лог"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет записи при успешном и ошибочном запросе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-security-1-repair-2",
+      "family_id": "Backend-Senior-V-security-1-repair",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "repair",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. Error-handler пишет в общий лог email, session token и текст ответа. Предложите allowlist диагностики, приватный audit и проверки реальных записей.",
+      "format": "open",
+      "reference_answer": "Использует allowlist метаданных; Исключает приватные тексты, контакты и токены; Разделяет защищённый audit и общий лог; Проверяет записи при успешном и ошибочном запросе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Использует allowlist метаданных"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Исключает приватные тексты, контакты и токены"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Разделяет защищённый audit и общий лог"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет записи при успешном и ошибочном запросе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-security-1-transfer-1",
+      "family_id": "Backend-Senior-V-security-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: каталог проектов. В общие логи попадают ответы тестов и email. Предложите безопасную диагностику и проверку.",
+      "format": "open",
+      "reference_answer": "Выбирает allowlist метаданных запроса; Исключает приватные тексты, токены и контакты; Разделяет защищённый audit и общие логи; Проверяет фактические записи при ошибке и успешном запросе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Выбирает allowlist метаданных запроса"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Исключает приватные тексты, токены и контакты"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Разделяет защищённый audit и общие логи"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет фактические записи при ошибке и успешном запросе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    },
+    {
+      "id": "Backend-Senior-V-security-1-transfer-2",
+      "family_id": "Backend-Senior-V-security-1-transfer",
+      "specialization": "Backend",
+      "grade": "Senior",
+      "stage": "V",
+      "competency": "security",
+      "slot": 1,
+      "branch": "transfer",
+      "max_score": 4,
+      "review_status": "authored_pending_independent_review",
+      "stem": "Сценарий: кабинет учебной команды. В общие логи попадают ответы тестов и email. Предложите безопасную диагностику и проверку.",
+      "format": "open",
+      "reference_answer": "Выбирает allowlist метаданных запроса; Исключает приватные тексты, токены и контакты; Разделяет защищённый audit и общие логи; Проверяет фактические записи при ошибке и успешном запросе.",
+      "rubric": [
+        {
+          "id": "c1",
+          "points": 1,
+          "criterion": "Выбирает allowlist метаданных запроса"
+        },
+        {
+          "id": "c2",
+          "points": 1,
+          "criterion": "Исключает приватные тексты, токены и контакты"
+        },
+        {
+          "id": "c3",
+          "points": 1,
+          "criterion": "Разделяет защищённый audit и общие логи"
+        },
+        {
+          "id": "c4",
+          "points": 1,
+          "criterion": "Проверяет фактические записи при ошибке и успешном запросе"
+        }
+      ],
+      "accepted_alternatives": "Эквивалентное корректное решение засчитывается по каждому критерию; совпадение формулировки с эталоном не требуется.",
+      "contradiction_rule": "Явное утверждение, противоречащее конкретному критерию, обнуляет только этот критерий. Упоминание терминов без связи с условием не является доказательством."
+    }
+  ],
+  "selection": {
+    "baseline": "server_hmac_variant",
+    "adaptive": "llm_choose_one_of_two_approved_family_variants",
+    "fallback": "atomic_stage_server_hmac",
+    "freeze_on_issue": true,
+    "chooser_response": {
+      "bank_version": "string",
+      "snapshot_hash": "string",
+      "slots": [
+        {
+          "slot_id": "string",
+          "item_id": "eligible id",
+          "reason": "1..500 chars"
+        }
+      ]
+    },
+    "required_slots": 5
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+    "https://react.dev/learn/updating-arrays-in-state",
+    "https://www.postgresql.org/docs/17/transaction-iso.html",
+    "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+  ]
+}

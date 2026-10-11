@@ -1,0 +1,13 @@
+{$DEMO_DOMAIN} {
+    encode zstd gzip
+    @privateSSO path /sso/admin* /sso/realms/master* /sso/realms/oop-demo/account* /sso/health* /sso/metrics*
+    route {
+        respond @privateSSO 404
+        handle /sso/* {
+            reverse_proxy keycloak:8080
+        }
+        handle {
+            reverse_proxy api:8088
+        }
+    }
+}

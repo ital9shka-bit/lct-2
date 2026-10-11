@@ -1,0 +1,30 @@
+services:
+  api:
+    ports: !reset []
+    mem_limit: 192m
+  worker:
+    mem_limit: 192m
+  postgres:
+    mem_limit: 256m
+  mailpit:
+    ports: !reset []
+    mem_limit: 64m
+  keycloak:
+    ports: !reset []
+  caddy:
+    image: caddy:2-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
+    environment:
+      DEMO_DOMAIN: ${DEMO_DOMAIN:?Set DEMO_DOMAIN}
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api: {condition: service_healthy}
+      keycloak: {condition: service_healthy}
+    mem_limit: 128m
+    restart: unless-stopped
+volumes:
+  caddy_data:
+  caddy_config:
