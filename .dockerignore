@@ -3,6 +3,9 @@
 ci
 .qa
 docs
+!docs/media/
+!docs/media/oop-demo.mp4
+!docs/media/oop-demo-poster.jpg
 deliverables
 scripts
 **/node_modules

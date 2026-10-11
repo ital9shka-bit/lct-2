@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151519">
+  <title>Демонстрация ООП — Объекто-ориентированный поиск</title>
+  <meta name="description" content="Короткое видео о платформе Объекто-ориентированный поиск: четыре составляющие оценки талантов и адресные предложения работодателей.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ООП — демонстрация продукта">
+  <meta property="og:description" content="Достижения ФСП, когнитивные задания, самооценка и техническая проверка в одном профиле таланта.">
+  <meta property="og:url" content="https://lunahub.ru/demo/">
+  <meta property="og:image" content="https://lunahub.ru/demo/oop-demo-poster.jpg">
+  <link rel="canonical" href="https://lunahub.ru/demo/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/demo/player.css">
+  <script src="/demo/player.js" defer></script>
+</head>
+<body>
+  <main class="watch-page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="ООП — открыть сервис"><img src="/favicon.svg" alt="" width="32" height="32"><span>ООП</span></a>
+      <a class="service-link" href="/">Открыть сервис <span aria-hidden="true">↗</span></a>
+    </header>
+    <section aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">Объекто-ориентированный поиск</p>
+        <h1 id="page-title">Демонстрация продукта</h1>
+      </div>
+      <div class="player" id="player">
+        <video id="demo-video" controls playsinline preload="metadata" poster="/demo/oop-demo-poster.jpg" aria-label="Демонстрация платформы Объекто-ориентированный поиск" aria-describedby="video-description">
+          <source src="/demo/oop-demo.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видеоплеер. <a href="/demo/oop-demo.mp4">Открыть видео напрямую</a>.
+        </video>
+        <button class="start-button" id="start-button" type="button" aria-label="Смотреть видео" hidden><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 4.5v15l12-7.5z" fill="currentColor"/></svg></button>
+      </div>
+      <div class="player-toolbar">
+        <label class="speed-control" for="playback-speed">Скорость
+          <select id="playback-speed" aria-label="Скорость воспроизведения" disabled>
+            <option value="0.75">0,75×</option>
+            <option value="1" selected>1×</option>
+            <option value="1.25">1,25×</option>
+            <option value="1.5">1,5×</option>
+            <option value="2">2×</option>
+          </select>
+        </label>
+      </div>
+      <p class="player-error" id="player-error" role="alert" hidden>Не удалось воспроизвести видео. <a href="/demo/oop-demo.mp4">Откройте файл напрямую</a> или обновите страницу.</p>
+      <div class="video-description" id="video-description">
+        <p>Объекто-ориентированный поиск помогает работодателю выбирать таланты по четырём взаимосвязанным составляющим: достижениям ФСП, когнитивным заданиям, самооценке и технической проверке. Профиль показывает сильные стороны, условия самостоятельной работы и основания каждого результата.</p>
+        <p>В видео — путь от заполненного профиля и оценки потенциала до подбора под задачу работодателя и адресного приглашения. Завершающий этап подхода — проверка заявленного опыта. Талант управляет видимостью профиля и доступом к контактам.</p>
+      </div>
+    </section>
+    <footer><span>ЛЦТ 2026 · ФСП · Демо продукта</span><span>В видео использованы вымышленные профили.</span></footer>
+  </main>
+</body>
+</html>

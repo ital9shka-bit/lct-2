@@ -28,4 +28,8 @@ await mkdir(new URL('../public/',import.meta.url),{recursive:true});
 await writeFile(new URL('../public/index.html',import.meta.url),html);
 for(const file of clientFiles)await writeFile(new URL('../public/'+file,import.meta.url),await readFile(new URL('../client/'+file,import.meta.url)));
 for(const file of ['favicon.svg','favicon.ico','apple-touch-icon.png'])await copyFile(new URL('../client/assets/'+file,import.meta.url),new URL('../public/'+file,import.meta.url));
+await mkdir(new URL('../public/demo/',import.meta.url),{recursive:true});
+for(const file of ['index.html','player.css','player.js'])await copyFile(new URL('../client/demo/'+file,import.meta.url),new URL('../public/demo/'+file,import.meta.url));
+execFileSync(process.execPath,['--check',fileURLToPath(new URL('../client/demo/player.js',import.meta.url))]);
+for(const file of ['oop-demo.mp4','oop-demo-poster.jpg'])await copyFile(new URL('../../docs/media/'+file,import.meta.url),new URL('../public/demo/'+file,import.meta.url));
 console.log('Built HTML from prototype-v13; CSS and embedded source assets preserved');

@@ -37,5 +37,10 @@ for(const path of ["/health","/","/favicon.svg","/favicon.ico","/apple-touch-ico
  if(path.endsWith("openapi")){const spec=await r.json();const methods=["get","post","put","patch","delete"];console.log("OpenAPI:",Object.keys(spec.paths).length,"paths,",Object.values(spec.paths).reduce((n,p)=>n+Object.keys(p).filter(k=>methods.includes(k)).length,0),"operations");}
 }
 console.log("Health, HTML, icons and runtime API contract: passed");
+const page=await fetch(base+"/demo/");assert.equal(page.status,200);assert.match(await page.text(),/<video[^>]*controls/);
+for(const path of ["/demo/player.css","/demo/player.js","/demo/oop-demo-poster.jpg"]){const r=await fetch(base+path);assert.equal(r.status,200,path);assert.ok((await r.arrayBuffer()).byteLength>100,path);}
+const head=await fetch(base+"/demo/oop-demo.mp4",{method:"HEAD"});assert.equal(head.status,200);assert.match(head.headers.get("content-type"),/video\/mp4/);assert.equal(head.headers.get("accept-ranges"),"bytes");assert.ok(Number(head.headers.get("content-length"))>1000000);
+const range=await fetch(base+"/demo/oop-demo.mp4",{headers:{Range:"bytes=0-1023"}});assert.equal(range.status,206);assert.match(range.headers.get("content-range"),/^bytes 0-1023\//);assert.equal((await range.arrayBuffer()).byteLength,1024);
+console.log("Public demo page, video headers and byte-range seeking without authentication: passed");
 '
 printf 'Clean Docker build and tests passed. Logs: %s\n' "$qa_dir"
