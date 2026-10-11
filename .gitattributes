@@ -1,0 +1,2 @@
+# Keep PDF byte offsets intact on checkouts with automatic line-ending conversion.
+*.pdf binary
