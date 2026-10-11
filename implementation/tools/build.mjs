@@ -32,4 +32,8 @@ await mkdir(new URL('../public/demo/',import.meta.url),{recursive:true});
 for(const file of ['index.html','player.css','player.js'])await copyFile(new URL('../client/demo/'+file,import.meta.url),new URL('../public/demo/'+file,import.meta.url));
 execFileSync(process.execPath,['--check',fileURLToPath(new URL('../client/demo/player.js',import.meta.url))]);
 for(const file of ['oop-demo.mp4','oop-demo-poster.jpg'])await copyFile(new URL('../../docs/media/'+file,import.meta.url),new URL('../public/demo/'+file,import.meta.url));
+await mkdir(new URL('../public/docs/',import.meta.url),{recursive:true});
+for(const file of ['index.html','document.css','reader.js'])await copyFile(new URL('../client/documentation/'+file,import.meta.url),new URL('../public/docs/'+file,import.meta.url));
+execFileSync(process.execPath,['--check',fileURLToPath(new URL('../client/documentation/reader.js',import.meta.url))]);
+await copyFile(new URL('../../docs/ООП_Техническая_документация_MVP.pdf',import.meta.url),new URL('../public/docs/oop-technical-documentation.pdf',import.meta.url));
 console.log('Built HTML from prototype-v13; CSS and embedded source assets preserved');

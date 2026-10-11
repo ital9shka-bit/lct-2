@@ -1,0 +1,14 @@
+import { execFileSync } from 'node:child_process';
+import { mkdir, readdir, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+const source = fileURLToPath(new URL('../public/docs/oop-technical-documentation.pdf', import.meta.url));
+const directory = new URL('../public/docs/pages/', import.meta.url);
+await mkdir(directory, { recursive: true });
+const info = execFileSync('pdfinfo', [source], { encoding: 'utf8' });
+const count = Number(info.match(/^Pages:\s+(\d+)/m)?.[1]);
+if (!count) throw new Error('PDF page count unavailable');
+execFileSync('pdftoppm', ['-jpeg', '-r', '150', '-jpegopt', 'quality=90', source, fileURLToPath(new URL('page', directory))], { timeout: 120000 });
+const files = (await readdir(directory)).filter(file => /^page-\d+\.jpg$/.test(file)).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+if (files.length !== count) throw new Error('Not all PDF preview pages rendered');
+await writeFile(new URL('../public/docs/pages.json', import.meta.url), JSON.stringify({ pages: files.map(file => '/docs/pages/' + file) }));
+console.log(`Rendered ${count} public PDF preview pages`);

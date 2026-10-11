@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151519">
+  <title>Документация ООП — Объекто-ориентированный поиск</title>
+  <meta name="description" content="Полная техническая документация MVP Объекто-ориентированный поиск: архитектура, методика оценки, API, развёртывание и проверки. Просмотр и скачивание PDF без входа.">
+  <link rel="canonical" href="https://lunahub.ru/docs/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/demo/player.css">
+  <link rel="stylesheet" href="/docs/document.css">
+  <script src="/docs/reader.js" defer></script>
+</head>
+<body>
+  <main class="watch-page docs-page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="ООП — открыть сервис"><img src="/favicon.svg" alt="" width="32" height="32"><span>ООП</span></a>
+      <nav class="topbar-links" aria-label="Материалы проекта">
+        <a class="nav-link" href="/demo/">Демо-видео</a>
+        <a class="service-link" href="/">Открыть сервис <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <section aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">Объекто-ориентированный поиск</p>
+        <h1 id="page-title">Документация проекта</h1>
+        <p class="document-summary">Описание MVP, архитектура, методика оценки, документированный API, инструкции по развёртыванию и проверке.</p>
+      </div>
+      <div class="document-tools">
+        <span class="document-meta">PDF · 54 страницы</span>
+        <div class="document-actions">
+          <a class="open-pdf" href="/docs/oop-technical-documentation.pdf" target="_blank" rel="noopener">Открыть в отдельной вкладке <span aria-hidden="true">↗</span></a>
+          <a class="download-pdf" href="/docs/oop-technical-documentation.pdf?download=1" download="ООП_Техническая_документация_MVP.pdf">Скачать PDF <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="document-preview">
+        <div class="reader-controls" aria-label="Управление предпросмотром">
+          <div class="page-navigation">
+            <button id="previous-page" type="button" aria-label="Предыдущая страница" disabled>←</button>
+            <label for="page-number">Страница</label>
+            <input id="page-number" type="number" min="1" max="54" value="1" aria-label="Номер страницы" disabled>
+            <span id="page-total">/ 54</span>
+            <button id="next-page" type="button" aria-label="Следующая страница" disabled>→</button>
+          </div>
+          <label class="zoom-control" for="page-zoom">Масштаб
+            <select id="page-zoom" aria-label="Масштаб страницы" disabled>
+              <option value="1">По ширине</option>
+              <option value="1.25">125%</option>
+              <option value="1.5">150%</option>
+              <option value="2">200%</option>
+            </select>
+          </label>
+        </div>
+        <div class="page-viewport" id="page-viewport" role="region" aria-label="Страница документа" tabindex="0">
+          <div class="page-canvas" id="page-canvas"><img id="document-page" src="/docs/pages/page-01.jpg" alt="Страница 1 технической документации ООП"></div>
+        </div>
+        <p class="reader-status" id="reader-status" role="status" aria-live="polite"></p>
+        <p class="reader-error" id="reader-error" role="alert" hidden>Не удалось загрузить предпросмотр. <a href="/docs/oop-technical-documentation.pdf" target="_blank" rel="noopener">Открыть исходный PDF</a>.</p>
+        <noscript><p class="reader-error">Доступна первая страница. <a href="/docs/oop-technical-documentation.pdf" target="_blank" rel="noopener">Открыть полный PDF</a>.</p></noscript>
+      </div>
+    </section>
+    <footer><span>ЛЦТ 2026 · ФСП · Демо продукта</span><a href="https://github.com/ital9shka-bit/lct-2" target="_blank" rel="noopener">Исходный код и документация на GitHub <span aria-hidden="true">↗</span></a></footer>
+  </main>
+</body>
+</html>

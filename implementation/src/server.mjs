@@ -16,6 +16,12 @@ app.use(express.json({limit:'6mb'}));
 app.get('/health',async(req,res)=>{try{await pool.query('SELECT 1');res.json({status:'ok',database:'postgresql'});}catch{res.status(503).json({status:'unavailable'});}});
 app.get('/api/v1/meta',(req,res)=>res.json({name:'Объекто-ориентированный поиск',environment:config.env,email_demo:config.env==='demo',auth_mode:config.authMode,public_demo:config.publicDemo,llm_mode:config.llmMode,ai_available:aiAvailable(),ai_model:aiAvailable()?config.llmModel:null,bank_status:'authored_pending_independent_review',api_version:'0.8',skills:['Python','PostgreSQL','FastAPI','REST API','Redis','Kafka','Docker','Git','JavaScript','TypeScript','React','HTML','CSS','Accessibility','Browser APIs']}));
 app.get('/api/v1/openapi',(req,res)=>res.json(contract));
+// Public documentation: inline preview on our site or explicit download, with no session.
+app.get('/docs/oop-technical-documentation.pdf',(req,res,next)=>{
+ res.attachment('ООП_Техническая_документация_MVP.pdf');
+ if(req.query.download!=='1')res.set('Content-Disposition',res.get('Content-Disposition').replace(/^attachment/,'inline'));
+ res.sendFile(fileURLToPath(new URL('../public/docs/oop-technical-documentation.pdf',import.meta.url)),error=>{if(error)next(error);});
+});
 async function limit(scope,max,seconds) {
  const bucket=Math.floor(Date.now()/1000/seconds),row=await one(pool,'INSERT INTO rate_buckets(scope,bucket,count,expires_at) VALUES($1,$2,1,now()+make_interval(secs => $3)) ON CONFLICT(scope,bucket) DO UPDATE SET count=rate_buckets.count+1 RETURNING count',[scope,bucket,seconds*2]);
  if(row.count>max)fail(429,'rate_limit','Слишком много запросов. Повторите позже.');

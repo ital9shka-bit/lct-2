@@ -3,6 +3,7 @@
 ci
 .qa
 docs
+!docs/ООП_Техническая_документация_MVP.pdf
 !docs/media/
 !docs/media/oop-demo.mp4
 !docs/media/oop-demo-poster.jpg

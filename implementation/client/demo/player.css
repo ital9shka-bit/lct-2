@@ -28,6 +28,11 @@ video { display: block; width: 100%; aspect-ratio: 16 / 9; max-height: calc(100s
 select { font-size: 14px; color: #f5f5f7; background: #242128; border: 1px solid #494250; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
 .player-error { color: #ffd4d4; background: #3b242c; padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.5; }
 .player-error a { text-decoration: underline; }
+.resource-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #39343f; border-radius: 12px; padding: 20px 22px; margin: 0 0 28px; background: #ffffff03; }
+.resource-card:hover { background: #ffffff07; border-color: #75618f; }
+.resource-card strong { font-size: 16px; font-weight: 600; }
+.resource-description { display: block; margin-top: 7px; font-size: 13px; line-height: 1.5; color: #aaa6b6; }
+.resource-arrow { font-size: 24px; color: #b8a7ff; }
 footer { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid #ffffff12; padding-top: 18px; color: #8e899a; font-size: 12px; line-height: 1.5; }
 @media (max-width: 600px) {
   .watch-page { width: calc(100% - 32px); padding-top: 18px; }
